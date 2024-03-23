@@ -2,7 +2,8 @@
 import Navbar from './components/Navbar.vue'
 import HeaderPhoto from './components/Header/HeaderPhoto.vue'
 import HeaderInfo from './components/Header/HeaderInfo.vue'
-import { navbarHeight } from './constants.ts'
+import { aboutMeDescription, navbarHeight } from './constants.ts'
+import EducationTimeLine from './components/EducationTimeLine.vue'
 </script>
 
 <template>
@@ -15,8 +16,17 @@ import { navbarHeight } from './constants.ts'
       <HeaderInfo />
       <HeaderPhoto />
     </div>
-    <div id="aboutMeSection" class="h-52">
-      <p>Hello</p>
+    <div id="mainContainer" class="w-full px-56">
+      <div id="aboutMeSection" class="w-full">
+        <div class="flex flex-col items-center">
+          <h1 class="text-6xl text-slate-950">About me</h1>
+          <p class="mt-4 text-center text-2xl text-slate-950">
+            {{ aboutMeDescription }}
+          </p>
+          <h1 class="mt-4 text-4xl text-slate-950">My Education Path</h1>
+          <EducationTimeLine />
+        </div>
+      </div>
     </div>
   </div>
 </template>
