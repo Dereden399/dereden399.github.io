@@ -2,16 +2,21 @@
 import Navbar from './components/Navbar.vue'
 import HeaderPhoto from './components/Header/HeaderPhoto.vue'
 import HeaderInfo from './components/Header/HeaderInfo.vue'
+import { navbarHeight } from './constants.ts'
 </script>
 
 <template>
   <Navbar />
-  <div class="mt-16 p-4">
+  <div :style="`margin-top: ${navbarHeight};`">
     <div
-      class="flex h-[40rem] w-full flex-row items-center justify-center bg-blue-50"
+      class="flex w-full flex-row items-center justify-center"
+      :style="`height: calc(100vh - ${navbarHeight});`"
     >
       <HeaderInfo />
       <HeaderPhoto />
+    </div>
+    <div id="aboutMeSection" class="h-52">
+      <p>Hello</p>
     </div>
   </div>
 </template>
