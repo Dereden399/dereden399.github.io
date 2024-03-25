@@ -23,8 +23,40 @@ import EducationTimeLine from './components/EducationTimeLine.vue'
           <p class="mt-4 text-center text-2xl text-slate-950">
             {{ aboutMeDescription }}
           </p>
-          <h1 class="mt-4 text-4xl text-slate-950">My Education Path</h1>
+          <h1 class="mt-4 text-4xl text-slate-950">My Education</h1>
           <EducationTimeLine />
+          <p class="text-5xl">
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+            tristique iaculis tortor, ut consequat mauris pellentesque nec.
+            Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam
+            odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus
+            tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis
+            vestibulum.',
+          </p>
+          <p class="text-5xl">
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+            tristique iaculis tortor, ut consequat mauris pellentesque nec.
+            Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam
+            odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus
+            tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis
+            vestibulum.',
+          </p>
+          <p class="text-5xl">
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+            tristique iaculis tortor, ut consequat mauris pellentesque nec.
+            Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam
+            odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus
+            tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis
+            vestibulum.',
+          </p>
+          <p class="text-5xl">
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+            tristique iaculis tortor, ut consequat mauris pellentesque nec.
+            Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam
+            odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus
+            tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis
+            vestibulum.',
+          </p>
         </div>
       </div>
     </div>

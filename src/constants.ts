@@ -1,5 +1,9 @@
 export const navbarHeight = '4rem'
 
+export const navbarHeightNum = 4
+
+export const educationTimelineSize = 3000
+
 export const aboutMeDescription = `
             I'm Denis Kuznetsov, an Aalto University student and ambitious 
             programmer. I have many years of coding experience in full-stack web
@@ -26,7 +30,7 @@ export const schoolDescription: SchoolType = {
   gpa: '5.0',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tristique iaculis tortor, ut consequat mauris pellentesque nec. Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis vestibulum.',
-  skills: []
+  skills: ['skill1', 'skill2', 'skill3']
 }
 export const spbuDescription: SchoolType = {
   name: 'Saint Petersburg State University',

@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         accent: {
+          50: '#d7c8ff',
           100: '#9873e1',
           200: '#7d50d3',
           300: '#6f35d3',

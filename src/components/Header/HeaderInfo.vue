@@ -1,11 +1,5 @@
 <script setup lang="ts">
-const scrollToAbout = () => {
-  const elem = document.getElementById('aboutMeSection')
-  console.log(elem)
-  if (elem) {
-    elem.scrollIntoView({ behavior: 'smooth' })
-  }
-}
+import { scrollTo } from '../utils.ts'
 </script>
 
 <template>
@@ -21,7 +15,7 @@ const scrollToAbout = () => {
       </p>
       <p
         class="mt-4 cursor-pointer text-3xl text-accent-500 transition-all hover:scale-110"
-        @click="scrollToAbout"
+        @click="scrollTo('aboutMeSection')"
       >
         Discover my story down below!
       </p>
