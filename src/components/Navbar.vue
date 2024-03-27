@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { navbarHeight } from '../constants.ts'
+import { scrollTo } from './utils.ts'
 </script>
 
 <template>
@@ -8,7 +9,7 @@ import { navbarHeight } from '../constants.ts'
       class="fixed top-0 z-10 flex w-full flex-row items-center justify-end gap-x-20 bg-white/30 px-16 align-middle shadow backdrop-blur-sm"
       :style="`height: ${navbarHeight};`"
     >
-      <a href="#" class="link">About</a>
+      <a class="link" @click="scrollTo('aboutMeSection')">About</a>
       <a href="#" class="link">Projects</a>
       <a href="#" class="link">Contacts</a>
     </div>
