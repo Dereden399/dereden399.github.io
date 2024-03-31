@@ -67,6 +67,12 @@ const handleScroll = (e: Event) => {
 }
 
 const opacityForSchoolCard = computed(() => {
+  if (
+    scrolledAmount.value >
+    educationTimelineSize - (stickyElemRef.value?.offsetHeight ?? 0) - 100
+  )
+    return 1
+
   const scrolled = scrolledAmount.value % oneNth.value
   if (shownSchool.value === 0) {
     return oneNth.value - scrolled > fadeDistance
@@ -94,6 +100,12 @@ const opacityForSchoolCard = computed(() => {
 })
 
 const scaleForSchoolCard = computed(() => {
+  if (
+    scrolledAmount.value >
+    educationTimelineSize - (stickyElemRef.value?.offsetHeight ?? 0) - 100
+  )
+    return 1
+
   const scrolled = scrolledAmount.value % oneNth.value
   if (shownSchool.value === 0) {
     return oneNth.value - scrolled > fadeDistance

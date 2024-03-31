@@ -19,7 +19,7 @@ import { navbarHeight } from '../../constants.ts'
       </p>
       <p
         class="mt-4 cursor-pointer text-xl text-accent-500 transition-all hover:scale-110 md:text-3xl"
-        @click="scrollTo('aboutMeSection')"
+        @click="scrollTo('aboutMe')"
       >
         Discover my story down below!
       </p>
