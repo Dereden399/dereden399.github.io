@@ -9,54 +9,24 @@ import EducationTimeLine from './components/EducationTimeLine.vue'
 <template>
   <Navbar />
   <div :style="`margin-top: ${navbarHeight};`">
-    <div
-      class="flex w-full flex-row items-center justify-center"
-      :style="`height: calc(100vh - ${navbarHeight});`"
-    >
+    <div class="flex w-full flex-col items-center justify-center md:flex-row">
       <HeaderInfo />
       <HeaderPhoto />
     </div>
-    <div id="mainContainer" class="w-full px-56">
-      <div id="aboutMeSection" class="w-full">
+    <div
+      id="mainContainer"
+      class="flex w-full flex-col items-center p-2 lg:p-0"
+    >
+      <div id="aboutMeSection" class="w-full lg:max-w-[80%]">
         <div class="flex flex-col items-center">
-          <h1 class="text-6xl text-slate-950">About me</h1>
-          <p class="mt-4 text-center text-2xl text-slate-950">
+          <h1 class="text-3xl text-slate-950">About me</h1>
+          <p class="mt-2 text-center text-lg text-slate-950 md:mt-4 md:text-xl">
             {{ aboutMeDescription }}
           </p>
-          <h1 class="mt-4 text-4xl text-slate-950">My Education</h1>
+          <h1 class="mt-2 text-3xl text-slate-950 md:mt-4">
+            My Education Path
+          </h1>
           <EducationTimeLine />
-          <p class="text-5xl">
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            tristique iaculis tortor, ut consequat mauris pellentesque nec.
-            Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam
-            odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus
-            tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis
-            vestibulum.',
-          </p>
-          <p class="text-5xl">
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            tristique iaculis tortor, ut consequat mauris pellentesque nec.
-            Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam
-            odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus
-            tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis
-            vestibulum.',
-          </p>
-          <p class="text-5xl">
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            tristique iaculis tortor, ut consequat mauris pellentesque nec.
-            Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam
-            odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus
-            tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis
-            vestibulum.',
-          </p>
-          <p class="text-5xl">
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            tristique iaculis tortor, ut consequat mauris pellentesque nec.
-            Quisque sed ante laoreet, sodales elit vitae, suscipit est. Ut diam
-            odio, molestie at urna bibendum, laoreet sagittis dolor. Phasellus
-            tristique et lectus nec lobortis. Etiam ultricies sit amet quam quis
-            vestibulum.',
-          </p>
         </div>
       </div>
     </div>

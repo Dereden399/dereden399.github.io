@@ -13,9 +13,9 @@ import { remToPx } from './utils.ts'
 
 const schools = [schoolDescription, spbuDescription, aaltoDescription]
 
-const oneNth = educationTimelineSize / schools.length
+const oneNthWithoutStickyHeight = educationTimelineSize / schools.length
 
-const fadeDistance = oneNth / 4
+const fadeDistance = oneNthWithoutStickyHeight / 5
 
 const years = [
   ...new Set(
@@ -29,21 +29,30 @@ const distances = [
 
 const containerRef = ref<HTMLDivElement | null>(null)
 
+const stickyElemRef = ref<HTMLDivElement | null>(null)
+
 const scrolledAmount = ref(0)
 
+const oneNth = computed(() => {
+  console.log(stickyElemRef.value?.offsetHeight)
+  return (
+    oneNthWithoutStickyHeight -
+    (stickyElemRef.value?.offsetHeight ?? 0) / schools.length
+  )
+})
+
 const shownSchool = computed(() => {
-  return Math.min(Math.floor(scrolledAmount.value / oneNth), schools.length - 1)
+  return Math.min(
+    Math.floor(scrolledAmount.value / oneNth.value),
+    schools.length - 1
+  )
 })
 
 const getScrollAmount = (scrolled: number) => {
   if (containerRef.value) {
     return (
-      Math.round(
-        scrolled +
-          remToPx(navbarHeightNum) +
-          document.documentElement.clientHeight * 0.1 -
-          10
-      ) - containerRef.value.offsetTop
+      Math.round(scrolled + remToPx(navbarHeightNum)) -
+      containerRef.value.offsetTop
     )
   } else return 0
 }
@@ -58,13 +67,13 @@ const handleScroll = (e: Event) => {
 }
 
 const opacityForSchoolCard = computed(() => {
-  const scrolled = scrolledAmount.value % oneNth
+  const scrolled = scrolledAmount.value % oneNth.value
   if (shownSchool.value === 0) {
-    return oneNth - scrolled > fadeDistance
+    return oneNth.value - scrolled > fadeDistance
       ? 1.0
-      : oneNth - scrolled < 10
+      : oneNth.value - scrolled < 10
         ? 0
-        : (oneNth - scrolled) / fadeDistance
+        : (oneNth.value - scrolled) / fadeDistance
   } else if (shownSchool.value === schools.length - 1) {
     return scrolled < fadeDistance
       ? scrolled < 10
@@ -76,22 +85,22 @@ const opacityForSchoolCard = computed(() => {
       ? scrolled < 10
         ? 0
         : scrolled / fadeDistance
-      : oneNth - scrolled > fadeDistance
+      : oneNth.value - scrolled > fadeDistance
         ? 1.0
-        : oneNth - scrolled < 10
+        : oneNth.value - scrolled < 10
           ? 0
-          : (oneNth - scrolled) / fadeDistance
+          : (oneNth.value - scrolled) / fadeDistance
   }
 })
 
 const scaleForSchoolCard = computed(() => {
-  const scrolled = scrolledAmount.value % oneNth
+  const scrolled = scrolledAmount.value % oneNth.value
   if (shownSchool.value === 0) {
-    return oneNth - scrolled > fadeDistance
+    return oneNth.value - scrolled > fadeDistance
       ? 1.0
-      : oneNth - scrolled < 10
+      : oneNth.value - scrolled < 10
         ? 0
-        : (oneNth - scrolled) / fadeDistance
+        : (oneNth.value - scrolled) / fadeDistance
   } else if (shownSchool.value === schools.length - 1) {
     return scrolled < fadeDistance
       ? scrolled < 10
@@ -103,11 +112,11 @@ const scaleForSchoolCard = computed(() => {
       ? scrolled < 10
         ? 0
         : scrolled / fadeDistance
-      : oneNth - scrolled > fadeDistance
+      : oneNth.value - scrolled > fadeDistance
         ? 1.0
-        : oneNth - scrolled < 10
+        : oneNth.value - scrolled < 10
           ? 0
-          : (oneNth - scrolled) / fadeDistance
+          : (oneNth.value - scrolled) / fadeDistance
   }
 })
 
@@ -127,33 +136,60 @@ onBeforeUnmount(() => {
     :style="`height: ${educationTimelineSize}px`"
   >
     <div
-      class="sticky mt-4 flex w-full flex-row gap-x-12"
-      :style="`top: calc(${navbarHeight} + 10vh)`"
+      ref="stickyElemRef"
+      class="sticky flex w-full flex-col gap-y-12 md:flex-row md:gap-x-12 md:gap-y-0"
+      :style="`top: calc(${navbarHeight} + 2vh)`"
     >
-      <div class="flex min-w-12 flex-[3] flex-col items-center">
+      <div
+        class="flex min-w-12 grow flex-row items-center justify-evenly md:flex-[1] md:flex-col"
+      >
         <span class="year-circle-small"></span>
         <span class="year-circle-small"></span>
-        <div
-          v-for="(year, idx) in years"
-          :key="year"
-          class="flex flex-col items-center"
-        >
-          <div class="year-circle relative">
-            <p class="absolute -top-1 left-12 text-2xl">
+        <template v-for="(year, idx) in years" :key="year">
+          <div
+            class="relative transition-all duration-500 ease-in-out"
+            :class="
+              idx === shownSchool || idx === shownSchool + 1
+                ? 'year-circle-selected'
+                : 'year-circle'
+            "
+          >
+            <p
+              class="absolute left-[80%] top-4 origin-top-left rotate-45 text-base md:left-[130%] md:top-0 md:rotate-0 md:text-2xl"
+            >
               {{ year }}
             </p>
           </div>
           <span
             v-for="n in distances[idx]"
             :key="`${year}-${n}`"
-            class="year-circle-small"
+            class="transition-all duration-500 ease-in-out"
+            :class="
+              idx === shownSchool
+                ? 'year-circle-small-selected'
+                : 'year-circle-small'
+            "
           ></span>
-        </div>
-        <span class="year-circle-small"></span>
-        <span class="year-circle-small"></span>
+        </template>
+        <span
+          class="transition-all duration-500 ease-in-out"
+          :class="
+            shownSchool == schools.length - 1
+              ? 'year-circle-small-selected'
+              : 'year-circle-small'
+          "
+        ></span>
+        <span
+          class="transition-all duration-500 ease-in-out"
+          :class="
+            shownSchool == schools.length - 1
+              ? 'year-circle-small-selected'
+              : 'year-circle-small'
+          "
+        ></span>
       </div>
 
-      <div class="flex flex-[6] flex-col justify-center">
+      <div class="flex flex-col justify-center md:flex-[2]">
         <SchoolInfoCard
           :school="schools[shownSchool]"
           :style="`opacity: ${opacityForSchoolCard}; scale: ${scaleForSchoolCard}`"
@@ -165,9 +201,18 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .year-circle {
-  @apply m-2 h-8 w-8 rounded-full border-2 border-slate-950;
+  @apply h-3 w-3 rounded-full border-2 border-slate-950 md:m-2 md:h-8 md:w-8;
 }
+
+.year-circle-selected {
+  @apply h-5 w-5 rounded-full border-2 border-slate-950 bg-accent-300 md:m-2 md:h-12 md:w-12;
+}
+
 .year-circle-small {
-  @apply m-3 h-2 w-2 rounded-full bg-slate-950;
+  @apply h-1 w-1 rounded-full bg-slate-950 md:m-3 md:h-2 md:w-2;
+}
+
+.year-circle-small-selected {
+  @apply h-2 w-2 rounded-full bg-accent-100 md:m-3 md:h-4 md:w-4;
 }
 </style>

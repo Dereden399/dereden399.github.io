@@ -1,6 +1,6 @@
-export const navbarHeight = '4rem'
+export const navbarHeight = '3rem'
 
-export const navbarHeightNum = 4
+export const navbarHeightNum = 3
 
 export const educationTimelineSize = 3000
 
@@ -33,7 +33,7 @@ export const schoolDescription: SchoolType = {
   skills: ['skill1', 'skill2', 'skill3']
 }
 export const spbuDescription: SchoolType = {
-  name: 'Saint Petersburg State University',
+  name: 'Saint-Petersburg State University',
   startYear: '2021',
   endYear: '2022',
   gpa: '4.5',
