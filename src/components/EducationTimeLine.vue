@@ -34,7 +34,6 @@ const stickyElemRef = ref<HTMLDivElement | null>(null)
 const scrolledAmount = ref(0)
 
 const oneNth = computed(() => {
-  console.log(stickyElemRef.value?.offsetHeight)
   return (
     oneNthWithoutStickyHeight -
     (stickyElemRef.value?.offsetHeight ?? 0) / schools.length

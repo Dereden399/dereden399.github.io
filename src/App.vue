@@ -19,10 +19,7 @@ import Footer from './components/Footer.vue'
       <HeaderInfo />
       <HeaderPhoto />
     </div>
-    <div
-      id="mainContainer"
-      class="flex w-full flex-col items-center p-2 lg:max-w-[80%] lg:p-0"
-    >
+    <div class="flex w-full flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
       <h1 id="aboutMe" class="text-3xl text-slate-950">About me</h1>
       <p class="mt-2 text-center text-lg text-slate-950 md:mt-4 md:text-xl">
         {{ aboutMeDescription }}
@@ -32,7 +29,9 @@ import Footer from './components/Footer.vue'
       <h1 id="projects" class="mt-2 text-3xl text-slate-950 md:mt-4">
         Projects
       </h1>
-      <ProjectsSection />
+    </div>
+    <ProjectsSection />
+    <div class="flex w-full flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
       <h1 id="contacts" class="mt-4 text-3xl text-slate-950 md:mt-6">
         Get in touch
       </h1>
