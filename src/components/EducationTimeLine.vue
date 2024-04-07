@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import {
-  aaltoDescription,
+  schools,
   educationTimelineSize,
   navbarHeight,
-  navbarHeightNum,
-  schoolDescription,
-  spbuDescription
+  navbarHeightNum
 } from '../constants.ts'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import SchoolInfoCard from './SchoolInfoCard.vue'
 import { remToPx } from './utils.ts'
-
-const schools = [schoolDescription, spbuDescription, aaltoDescription]
 
 const oneNthWithoutStickyHeight = educationTimelineSize / schools.length
 

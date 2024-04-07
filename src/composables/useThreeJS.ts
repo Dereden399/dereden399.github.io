@@ -1,22 +1,17 @@
-import { computed, onMounted, onUnmounted, ref, Ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, Ref, watch } from 'vue'
 import * as THREE from 'three'
 import { useWindowSize } from './useWindowSize.ts'
-import { remToPx } from '../components/utils.ts'
-import { navbarHeightNum } from '../constants.ts'
-import { HorizontalMapControls } from '../components/HorizontalMapControls.ts'
+import { HorizontalControls } from './HorizontalControls.ts'
 
 //TODO: Add WebGL check https://threejs.org/docs/index.html#manual/en/introduction/WebGL-compatibility-check
 export const useThreeJS = (
   canvasRef: Ref<HTMLCanvasElement | null>,
   animateLoop: () => void
 ) => {
-  const { width, height: windowHeight } = useWindowSize()
+  const { width, height } = useWindowSize()
   const animationRequestId = ref<number | null>(null)
-  const height = computed(() => {
-    return Math.round(windowHeight.value - remToPx(navbarHeightNum))
-  })
 
-  let controls: HorizontalMapControls
+  let controls: HorizontalControls
   let renderer: THREE.WebGLRenderer
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(
@@ -25,6 +20,12 @@ export const useThreeJS = (
     0.1,
     1000
   )
+
+  const light = new THREE.PointLight('#fff', 50, 100)
+  light.position.set(0, 0, 5)
+  scene.add(light)
+
+  camera.position.z = 5
 
   const updateRendererAndCamera = () => {
     renderer.setSize(width.value, height.value)
@@ -42,6 +43,7 @@ export const useThreeJS = (
   const animateLoopInner = () => {
     animateLoop()
     controls.update()
+    light.position.set(camera.position.x, camera.position.y, camera.position.z)
     renderer.render(scene, camera)
     animationRequestId.value = requestAnimationFrame(animateLoopInner)
   }
@@ -76,10 +78,8 @@ export const useThreeJS = (
       antialias: true,
       alpha: true
     })
-    controls = new HorizontalMapControls(camera, renderer.domElement)
-    controls.enableDamping = true
-    controls.enableZoom = false
-    controls.enableRotate = false
+    controls = new HorizontalControls(camera, renderer.domElement)
+
     updateRendererAndCamera()
     animateLoopInner()
     observer.observe(canvasRef.value)
@@ -88,6 +88,7 @@ export const useThreeJS = (
   // cleanup
   onUnmounted(() => {
     observer.disconnect()
+    controls.delete()
   })
 
   //@ts-ignore

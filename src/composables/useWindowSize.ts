@@ -5,8 +5,8 @@ export const useWindowSize = () => {
   const height = ref(window.innerHeight)
 
   const onResize = () => {
-    width.value = window.innerWidth
-    height.value = window.innerHeight
+    width.value = window.document.documentElement.clientWidth
+    height.value = window.document.documentElement.clientHeight
   }
 
   onMounted(() => {
