@@ -5,13 +5,11 @@ import {
   navbarHeight,
   navbarHeightNum
 } from '../constants.ts'
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import SchoolInfoCard from './SchoolInfoCard.vue'
 import { remToPx } from './utils.ts'
 
 const oneNthWithoutStickyHeight = educationTimelineSize / schools.length
-
-const fadeDistance = oneNthWithoutStickyHeight / 5
 
 const years = [
   ...new Set(
@@ -29,6 +27,8 @@ const stickyElemRef = ref<HTMLDivElement | null>(null)
 
 const scrolledAmount = ref(0)
 
+const changeAnimationPlaying = ref(false)
+
 const oneNth = computed(() => {
   return (
     oneNthWithoutStickyHeight -
@@ -41,6 +41,15 @@ const shownSchool = computed(() => {
     Math.floor(scrolledAmount.value / oneNth.value),
     schools.length - 1
   )
+})
+
+watch(shownSchool, () => {
+  if (!changeAnimationPlaying.value) {
+    changeAnimationPlaying.value = true
+    setTimeout(() => {
+      changeAnimationPlaying.value = false
+    }, 600)
+  }
 })
 
 const getScrollAmount = (scrolled: number) => {
@@ -60,72 +69,6 @@ const handleScroll = (e: Event) => {
     }
   }
 }
-
-const opacityForSchoolCard = computed(() => {
-  if (
-    scrolledAmount.value >
-    educationTimelineSize - (stickyElemRef.value?.offsetHeight ?? 0) - 100
-  )
-    return 1
-
-  const scrolled = scrolledAmount.value % oneNth.value
-  if (shownSchool.value === 0) {
-    return oneNth.value - scrolled > fadeDistance
-      ? 1.0
-      : oneNth.value - scrolled < 10
-        ? 0
-        : (oneNth.value - scrolled) / fadeDistance
-  } else if (shownSchool.value === schools.length - 1) {
-    return scrolled < fadeDistance
-      ? scrolled < 10
-        ? 0
-        : scrolled / fadeDistance
-      : 1
-  } else {
-    return scrolled < fadeDistance
-      ? scrolled < 10
-        ? 0
-        : scrolled / fadeDistance
-      : oneNth.value - scrolled > fadeDistance
-        ? 1.0
-        : oneNth.value - scrolled < 10
-          ? 0
-          : (oneNth.value - scrolled) / fadeDistance
-  }
-})
-
-const scaleForSchoolCard = computed(() => {
-  if (
-    scrolledAmount.value >
-    educationTimelineSize - (stickyElemRef.value?.offsetHeight ?? 0) - 100
-  )
-    return 1
-
-  const scrolled = scrolledAmount.value % oneNth.value
-  if (shownSchool.value === 0) {
-    return oneNth.value - scrolled > fadeDistance
-      ? 1.0
-      : oneNth.value - scrolled < 10
-        ? 0
-        : (oneNth.value - scrolled) / fadeDistance
-  } else if (shownSchool.value === schools.length - 1) {
-    return scrolled < fadeDistance
-      ? scrolled < 10
-        ? 0
-        : scrolled / fadeDistance
-      : 1
-  } else {
-    return scrolled < fadeDistance
-      ? scrolled < 10
-        ? 0
-        : scrolled / fadeDistance
-      : oneNth.value - scrolled > fadeDistance
-        ? 1.0
-        : oneNth.value - scrolled < 10
-          ? 0
-          : (oneNth.value - scrolled) / fadeDistance
-  }
-})
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
@@ -199,7 +142,7 @@ onBeforeUnmount(() => {
       <div class="flex flex-col justify-center md:flex-[2]">
         <SchoolInfoCard
           :school="schools[shownSchool]"
-          :style="`opacity: ${opacityForSchoolCard}; scale: ${scaleForSchoolCard}`"
+          :class="{ inChange: changeAnimationPlaying }"
         />
       </div>
     </div>
@@ -221,5 +164,23 @@ onBeforeUnmount(() => {
 
 .year-circle-small-selected {
   @apply h-2 w-2 rounded-full bg-accent-100 md:m-3 md:h-4 md:w-4;
+}
+
+.inChange {
+  animation: changeAnimation 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  scale: 1;
+  opacity: 1;
+}
+
+@keyframes changeAnimation {
+  0%,
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+  50% {
+    scale: 0;
+    opacity: 0;
+  }
 }
 </style>

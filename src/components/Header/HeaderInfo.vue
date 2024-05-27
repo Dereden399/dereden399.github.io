@@ -5,7 +5,7 @@ import { navbarHeight } from '../../constants.ts'
 
 <template>
   <div
-    class="flex flex-auto flex-col items-center justify-center p-2 md:flex-[3] lg:p-0"
+    class="flex flex-auto flex-col items-center justify-center p-2 md:flex-[2] lg:p-0"
     :style="`height: calc(100vh - ${navbarHeight});`"
   >
     <div>

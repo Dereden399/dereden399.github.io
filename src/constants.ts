@@ -82,7 +82,7 @@ const PortfolioWebsiteProject: ProjectInfoType = {
 const VoiceEmotionRecognitionProject: ProjectInfoType = {
   name: 'Voice Emotion Recognition',
   description:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tristique iaculis tortor, ut consequat mauris pellentesque nec. Quisque sed ante laoreet...',
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tristique iaculis tortor, ut consequat mauris pellentesque nec.Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet... Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...Quisque sed ante laoreet...',
   technologies: ['Python', 'Tensorflow', 'Keras', 'Numpy'],
   isPrivate: false,
   link: 'https://github.com/Dereden399/voice-emotion-recognition'

@@ -7,7 +7,11 @@ import { navbarHeight } from '../../constants.ts'
     class="flex flex-auto items-center justify-start md:flex-[2]"
     :style="`height: calc(100vh - ${navbarHeight});`"
   >
-    <div class="h-96 w-40 bg-accent-300">Photo here</div>
+    <img
+      src="/picture.png"
+      class="max-h-[40rem] w-full max-w-[40rem]"
+      alt="picture of me"
+    />
   </div>
 </template>
 
