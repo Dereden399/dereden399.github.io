@@ -20,7 +20,7 @@ const { school } = defineProps<{ school: SchoolType }>()
       <h2 class="text-lg text-accent-600 md:text-3xl">GPA: {{ school.gpa }}</h2>
     </div>
     <div class="p-4">
-      <p class="text-base md:text-xl">{{ school.description }}</p>
+      <p class="3xl:text-2xl text-base md:text-xl">{{ school.description }}</p>
       <h1 v-if="school.skills.length > 0" class="text-lg md:text-2xl">
         Skills:
       </h1>

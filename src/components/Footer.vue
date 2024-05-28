@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex w-full flex-col items-center text-slate-950">
+  <div class="flex w-full flex-col items-center text-lg text-slate-950">
     <div
       class="my-16 flex flex-col items-center border-t-2 border-blue-300 py-8"
     >

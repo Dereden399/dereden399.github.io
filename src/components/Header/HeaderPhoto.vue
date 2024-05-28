@@ -5,7 +5,7 @@
     class="flex h-full flex-auto items-center justify-center md:flex-[2] md:justify-start"
   >
     <div
-      class="relative flex w-full max-w-[85%] flex-col items-center justify-center"
+      class="relative flex w-full max-w-[80%] flex-col items-center justify-center"
     >
       <img src="/picture.png" class="w-full" alt="picture of me" />
       <div
