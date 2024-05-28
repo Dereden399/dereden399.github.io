@@ -15,7 +15,10 @@ import Footer from './components/Footer.vue'
     :style="`margin-top: ${navbarHeight};`"
     class="flex w-full flex-col items-center"
   >
-    <div class="flex w-full flex-col items-center justify-center md:flex-row">
+    <div
+      class="flex w-full flex-col items-center justify-center md:flex-row"
+      :style="`height: calc(100vh - ${navbarHeight});`"
+    >
       <HeaderInfo />
       <HeaderPhoto />
     </div>

@@ -48,7 +48,7 @@ watch(shownSchool, () => {
     changeAnimationPlaying.value = true
     setTimeout(() => {
       changeAnimationPlaying.value = false
-    }, 600)
+    }, 500)
   }
 })
 

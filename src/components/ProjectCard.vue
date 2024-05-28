@@ -6,12 +6,12 @@ const { project } = defineProps<{ project: ProjectInfoType }>()
 
 <template>
   <div
-    class="relative h-96 transition-all duration-300 ease-in-out lg:h-80 lg:hover:scale-105"
+    class="relative h-96 shadow-xl transition-all duration-300 ease-in-out lg:h-80 lg:hover:scale-105"
   >
     <div
       class="absolute -z-10 h-96 w-full translate-x-2 translate-y-2 rounded-xl bg-accent-300/50 lg:h-80"
     />
-    <div class="flex h-96 flex-col rounded-xl bg-white p-4 shadow-xl lg:h-80">
+    <div class="flex h-96 flex-col rounded-xl bg-white p-4 lg:h-80">
       <h1 class="text-xl md:text-3xl">
         {{ project.name }}
         <span v-if="project.isPrivate" class="text-sm text-zinc-700 md:text-lg"
