@@ -16,15 +16,15 @@ import Footer from './components/Footer.vue'
     class="flex w-full flex-col items-center"
   >
     <div
-      class="flex w-full flex-col items-center justify-center md:flex-row"
-      :style="`height: calc(100vh - ${navbarHeight});`"
+      class="flex w-full flex-col items-center justify-center gap-x-12 px-2 md:flex-row md:px-16"
+      :style="`min-height: calc(100vh - ${navbarHeight});`"
     >
       <HeaderInfo />
       <HeaderPhoto />
     </div>
     <div class="flex w-full flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
       <h1 id="aboutMe" class="text-3xl text-slate-950">About me</h1>
-      <p class="mt-2 text-center text-lg text-slate-950 md:mt-4 md:text-xl">
+      <p class="mt-2 text-center text-lg text-slate-950 md:mt-4 md:text-2xl">
         {{ aboutMeDescription }}
       </p>
       <h1 class="mt-2 text-3xl text-slate-950 md:mt-4">My Education Path</h1>

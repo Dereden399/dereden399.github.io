@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <p class="mt-2 text-center text-lg text-slate-950 md:mt-4 lg:max-w-[50%]">
+  <p
+    class="mt-2 text-center text-lg text-slate-950 md:mt-4 md:text-2xl lg:max-w-[50%]"
+  >
     I'm always open to new opportunities and collaborations! If you'd like to
     get in touch or explore potential projects together, feel free to reach out
     to me through my

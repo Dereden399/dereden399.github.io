@@ -1,14 +1,19 @@
-<script setup lang="ts">
-import { navbarHeight } from '../../constants.ts'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="flex h-full flex-auto items-center justify-start md:flex-[2]">
+  <div
+    class="flex h-full flex-auto items-center justify-center md:flex-[2] md:justify-start"
+  >
     <div
-      class="relative flex h-full w-full max-w-[40rem] flex-col items-center justify-center"
+      class="relative flex w-full max-w-[85%] flex-col items-center justify-center"
     >
       <img src="/picture.png" class="w-full" alt="picture of me" />
-      <div class="absolute w-full rounded-full bg-accent-200/50 pt-[100%]" />
+      <div
+        class="absolute -left-[8%] bottom-0 -z-10 w-[35%] rounded-full bg-accent-100 pt-[35%]"
+      />
+      <div
+        class="absolute -right-[10%] top-0 -z-10 w-[50%] rounded-full bg-accent-500 pt-[50%]"
+      />
     </div>
   </div>
 </template>
