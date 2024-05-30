@@ -4,15 +4,22 @@ export const navbarHeightNum = 3
 
 export const educationTimelineSize = 3000
 
-export const aboutMeDescription = `
-            I'm Denis Kuznetsov, an Aalto University student and ambitious 
-            programmer. I have many years of coding experience in full-stack web
-            development and also mobile software development and several other
-            technologies, such as C++, Scala, and Python. I participated in
-            multiple coding challenges during my studies at school. I am highly
-            enthusiastic and open to any programming activity, especially web
-            and mobile development, as well as machine learning.
-`
+export const aboutMeDescription =
+  "<p>I'm an <b>ambitious programmer</b> and current student at Aalto University. With many years of experience in <b>full-stack web development</b> and <b>mobile software development</b>, I have a passion for creating innovative and efficient solutions. My expertise extends to a variety of technologies, including <b>C++</b>, <b>Scala</b>, and <b>Python</b>, making me a versatile and well-rounded developer.</p>" +
+  '<p>I consider myself a well-rounded specialist, with a strong interest in numerous coding-related technologies. My curiosity and enthusiasm drive me to explore different areas, from <b>graphic engineering</b> to <b>machine learning</b>. This curiosity helps me approach problems from various angles and develop comprehensive solutions that make the most of the latest tech advancements</p>'
+
+export const mySkills = [
+  'Typescript',
+  'Javascript',
+  'C++',
+  'Scala',
+  'Python',
+  'Swift',
+  'React',
+  'Vue.js',
+  'SQL',
+  'React Native'
+]
 
 export interface SchoolType {
   name: string
