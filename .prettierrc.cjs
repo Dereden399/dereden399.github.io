@@ -3,6 +3,5 @@ module.exports = {
   singleQuote: true,
   tabWidth: 2,
   trailingComma: 'none',
-  proseWrap: "always",
   plugins: ['prettier-plugin-tailwindcss']
 }

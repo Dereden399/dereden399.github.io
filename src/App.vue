@@ -10,11 +10,11 @@ import Footer from './components/Footer.vue'
 import SkillsSection from './components/SkillsSection.vue'
 </script>
 
-<template>
+<template class="overflow-hidden">
   <Navbar />
   <div
     :style="`margin-top: ${navbarHeight};`"
-    class="relative flex w-full flex-col items-center justify-center overflow-hidden"
+    class="relative flex w-full flex-col items-center justify-center"
   >
     <div
       class="absolute -right-[15%] -top-[5rem] -z-10 h-[15rem] w-[15rem] rounded-full bg-accent-50 md:-left-[8%] md:-top-[20rem] md:h-[30rem] md:w-[30rem] lg:h-[40rem] lg:w-[40rem]"
