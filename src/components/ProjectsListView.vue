@@ -5,7 +5,7 @@ import ProjectCard from './ProjectCard.vue'
 
 <template>
   <div
-    class="grid grid-cols-1 gap-5 p-3 md:grid-cols-2 lg:max-w-[80%] lg:grid-cols-3 lg:p-0"
+    class="flex flex-col gap-5 p-3 md:grid md:grid-cols-2 lg:max-w-[80%] lg:grid-cols-3 lg:p-0"
   >
     <ProjectCard
       v-for="project in projects"
