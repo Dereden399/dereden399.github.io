@@ -10,10 +10,6 @@ This is a portfolio website that I created to showcase my projects and skills. W
 ## Features
 - Clean, minimalistic design
 - Fully responsive
-### To be implemented
-- Dark mode
-- Better skills section
-- 3D background
 
 ## Project setup
 ```
