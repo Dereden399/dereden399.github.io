@@ -1,0 +1,32 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  simple-deployment-pipeline:
+    if: ${{contains(join(toJson(github.event.commits.*.message)), '#deploy')}}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4.1.5
+      - uses: actions/setup-node@v4.0.2
+        with:
+          node-version: "18"
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run eslint
+      - name: Build
+        run: npm run build
+  tag-release:
+    if: ${{ contains(join(toJson(github.event.commits.*.message)), '#deploy') }}
+    needs: [simple-deployment-pipeline]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4.1.5
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: "patch"
