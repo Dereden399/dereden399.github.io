@@ -13,7 +13,7 @@ import SkillsSection from './components/SkillsSection.vue'
 <template>
   <div class="absolute left-0 top-0 h-screen w-screen overflow-hidden">
     <div
-      class="absolute -right-[20%] -top-[5rem] -z-10 h-[15rem] w-[15rem] rounded-full bg-accent-50 md:-left-[8%] md:-top-[20rem] md:h-[30rem] md:w-[30rem] lg:h-[40rem] lg:w-[40rem]"
+      class="absolute -right-[20%] -top-[80px] -z-10 h-[240px] w-[240px] rounded-full bg-accent-50 md:-left-[8%] md:-top-[320px] md:h-[480px] md:w-[480px] lg:h-[640px] lg:w-[640px]"
     />
   </div>
   <Navbar />
@@ -23,7 +23,7 @@ import SkillsSection from './components/SkillsSection.vue'
   >
     <div class="flex w-full flex-col items-center 3xl:max-w-[2400px]">
       <div
-        class="flex w-full flex-col items-center justify-center gap-x-12 px-2 md:flex-row md:px-16"
+        class="flex w-full flex-col items-center justify-center gap-x-[48px] px-[8px] md:flex-row md:px-[64px]"
         :style="`min-height: calc(100vh - ${navbarHeight});`"
       >
         <HeaderInfo />

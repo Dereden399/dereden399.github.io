@@ -1,8 +1,8 @@
-export const navbarHeight = '3rem'
+export const navbarHeight = '2rem'
 
-export const navbarHeightNum = 3
+export const navbarHeightNum = 2
 
-export const educationTimelineSize = 3000
+export const educationTimelineSize = 4000
 
 export const aboutMeDescription =
   "<p>I'm an <b>ambitious programmer</b> and current student at Aalto University. With many years of experience in <b>full-stack web development</b> and <b>mobile software development</b>, I have a passion for creating innovative and efficient solutions. My expertise extends to a variety of technologies, including <b>C++</b>, <b>Scala</b>, and <b>Python</b>, making me a versatile and well-rounded developer.</p>" +
@@ -44,7 +44,7 @@ const schoolDescription: SchoolType = {
   endYear: '2021',
   gpa: '5.0',
   description:
-    'My programming journey began early when I discovered a deep interest in coding and <b>competitive programming</b>. During high school, I participated in multiple coding challenges, winning many of them. Theses experiences sharpened my <b>problem-solving skills</b> and fueled my enthusiasm for technology.',
+    'My programming journey began early when I discovered a deep interest in coding and <b>competitive programming</b>. During high school, I participated in multiple coding challenges, winning many of them. These experiences sharpened my <b>problem-solving skills</b> and fueled my enthusiasm for technology.',
   skills: ['C++', 'Python', 'Competitive programming']
 }
 const spbuDescription: SchoolType = {

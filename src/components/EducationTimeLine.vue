@@ -36,6 +36,10 @@ const oneNth = computed(() => {
   )
 })
 
+const scrolledPercentageInOneNth = computed(() => {
+  return (scrolledAmount.value % oneNth.value) / oneNth.value
+})
+
 const shownSchool = computed(() => {
   return Math.min(
     Math.floor(scrolledAmount.value / oneNth.value),
@@ -70,6 +74,15 @@ const handleScroll = (e: Event) => {
   }
 }
 
+const scrollToSection = (section: number) => {
+  if (containerRef.value && section < schools.length) {
+    window.scrollTo({
+      top: containerRef.value.offsetTop + oneNth.value * section,
+      behavior: 'smooth'
+    })
+  }
+}
+
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
 })
@@ -82,31 +95,43 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="containerRef"
-    class="relative mt-4 w-full"
+    class="mt-4 w-full"
     :style="`height: ${educationTimelineSize}px`"
   >
     <div
       ref="stickyElemRef"
-      class="sticky flex w-full flex-col gap-y-12 md:flex-row md:gap-x-12 md:gap-y-0"
+      class="sticky flex h-[90vh] w-full flex-col justify-start gap-y-6 md:flex-row md:gap-x-12 md:gap-y-0"
       :style="`top: calc(${navbarHeight} + 2vh)`"
     >
       <div
-        class="flex min-w-12 grow flex-row items-center justify-evenly md:flex-[1] md:flex-col"
+        class="flex min-w-12 flex-row items-center justify-evenly md:flex-[1] md:flex-col md:justify-start"
       >
-        <span class="year-circle-small"></span>
         <span class="year-circle-small"></span>
         <template v-for="(year, idx) in years" :key="year">
           <div
-            class="relative transition-all duration-500 ease-in-out"
-            :class="
-              idx === shownSchool || idx === shownSchool + 1
-                ? 'year-circle-selected'
-                : 'year-circle'
-            "
+            class="flex flex-col items-center md:ml-10 md:flex-row"
+            @click="scrollToSection(idx)"
           >
-            <p
-              class="absolute left-[80%] top-4 origin-top-left rotate-45 text-base md:left-[130%] md:top-0 md:rotate-0 md:text-2xl"
+            <div
+              class="relative transition-all duration-500 ease-in-out"
+              :class="
+                idx === shownSchool || idx === shownSchool + 1
+                  ? 'year-circle-selected'
+                  : 'year-circle'
+              "
             >
+              <p
+                class="absolute -left-[8px] text-base md:hidden md:text-lg"
+                :class="
+                  idx === shownSchool || idx === shownSchool + 1
+                    ? 'top-[12px]'
+                    : 'top-[8px]'
+                "
+              >
+                {{ year }}
+              </p>
+            </div>
+            <p class="hidden text-base md:block md:text-lg">
               {{ year }}
             </p>
           </div>
@@ -116,34 +141,52 @@ onBeforeUnmount(() => {
             class="transition-all duration-500 ease-in-out"
             :class="
               idx === shownSchool
-                ? 'year-circle-small-selected'
+                ? scrolledPercentageInOneNth >= n / distances[idx]
+                  ? 'year-circle-small-selected-now'
+                  : 'year-circle-small-selected'
                 : 'year-circle-small'
             "
+            @click="scrollToSection(idx)"
           ></span>
         </template>
         <span
           class="transition-all duration-500 ease-in-out"
           :class="
             shownSchool == schools.length - 1
-              ? 'year-circle-small-selected'
+              ? scrolledPercentageInOneNth >= 0.3
+                ? 'year-circle-small-selected-now'
+                : 'year-circle-small-selected'
               : 'year-circle-small'
           "
+          @click="scrollToSection(schools.length - 1)"
         ></span>
         <span
           class="transition-all duration-500 ease-in-out"
           :class="
             shownSchool == schools.length - 1
-              ? 'year-circle-small-selected'
+              ? scrolledPercentageInOneNth >= 0.6
+                ? 'year-circle-small-selected-now'
+                : 'year-circle-small-selected'
               : 'year-circle-small'
           "
+          @click="scrollToSection(schools.length - 1)"
         ></span>
       </div>
 
-      <div class="flex flex-col justify-center md:flex-[2]">
+      <div class="flex flex-col justify-start md:mt-[10vh] md:flex-[2]">
         <SchoolInfoCard
           :school="schools[shownSchool]"
           :class="{ inChange: changeAnimationPlaying }"
         />
+      </div>
+
+      <div
+        class="absolute bottom-0 right-0 origin-bottom-right md:hidden"
+        :class="`${scrolledAmount > educationTimelineSize - stickyElemRef?.offsetHeight && 'hidden'}`"
+      >
+        <div>
+          <p class="animate-bounce">Scroll</p>
+        </div>
       </div>
     </div>
   </div>
@@ -151,19 +194,23 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .year-circle {
-  @apply h-3 w-3 rounded-full border-2 border-slate-950 md:m-2 md:h-8 md:w-8;
+  @apply h-[12px] w-[12px] rounded-full border-2 border-slate-950 md:m-[8px] md:h-[32px] md:w-[32px];
 }
 
 .year-circle-selected {
-  @apply h-5 w-5 rounded-full border-2 border-slate-950 bg-accent-300 md:m-2 md:h-12 md:w-12;
+  @apply h-[20px] w-[20px] rounded-full border-2 border-slate-950 bg-accent-300 md:m-[8px] md:h-[48px] md:w-[48px];
 }
 
 .year-circle-small {
-  @apply h-1 w-1 rounded-full bg-slate-950 md:m-3 md:h-2 md:w-2;
+  @apply h-[6px] w-[6px] rounded-full bg-slate-950 md:m-[6px] md:h-[8px] md:w-[8px];
 }
 
 .year-circle-small-selected {
-  @apply h-2 w-2 rounded-full bg-accent-100 md:m-3 md:h-4 md:w-4;
+  @apply h-[8px] w-[8px] rounded-full bg-accent-50 md:m-[6px] md:h-[16px] md:w-[16px];
+}
+
+.year-circle-small-selected-now {
+  @apply h-[8px] w-[8px] rounded-full bg-accent-500 md:m-[6px] md:h-[16px] md:w-[16px];
 }
 
 .inChange {

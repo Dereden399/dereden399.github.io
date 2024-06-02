@@ -6,7 +6,7 @@ import { scrollTo } from './utils.ts'
 <template>
   <nav>
     <div
-      class="fixed top-0 z-10 flex w-full flex-row items-center justify-end gap-x-5 bg-white/30 px-5 align-middle shadow backdrop-blur-sm md:gap-x-20 md:px-16"
+      class="fixed top-0 z-10 flex w-full flex-row items-center justify-end gap-x-[20px] bg-white/30 px-[20px] align-middle shadow backdrop-blur-sm md:gap-x-[80px] md:px-[64px]"
       :style="`height: ${navbarHeight};`"
     >
       <a class="link" @click="scrollTo('aboutMe')">About</a>
@@ -18,6 +18,6 @@ import { scrollTo } from './utils.ts'
 
 <style scoped>
 .link {
-  @apply text-base font-semibold text-slate-950 hover:text-slate-600 md:text-lg;
+  @apply cursor-pointer text-base font-semibold text-slate-950 hover:text-slate-600;
 }
 </style>
