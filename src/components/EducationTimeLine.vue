@@ -182,7 +182,7 @@ onBeforeUnmount(() => {
 
       <div
         class="absolute bottom-0 right-0 origin-bottom-right md:hidden"
-        :class="`${scrolledAmount > educationTimelineSize - stickyElemRef?.offsetHeight && 'hidden'}`"
+        :class="`${scrolledAmount > educationTimelineSize - (stickyElemRef ? stickyElemRef.offsetHeight : 0) && 'hidden'}`"
       >
         <div>
           <p class="animate-bounce">Scroll</p>
