@@ -184,8 +184,11 @@ onBeforeUnmount(() => {
         class="absolute bottom-0 right-0 origin-bottom-right md:hidden"
         :class="`${scrolledAmount > educationTimelineSize - (stickyElemRef ? stickyElemRef.offsetHeight : 0) && 'hidden'}`"
       >
-        <div>
-          <p class="animate-bounce">Scroll</p>
+        <div class="flex flex-col items-center">
+          <svg width="70" height="70">
+            <image xlink:href="/scroll-indicator.svg" height="70" width="70" />
+          </svg>
+          <p>Scroll vertically</p>
         </div>
       </div>
     </div>

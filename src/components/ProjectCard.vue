@@ -34,7 +34,7 @@ const { project } = defineProps<{ project: ProjectInfoType }>()
         v-if="project.link"
         :href="project.link"
         target="_blank"
-        class="text-lg text-accent-500 md:text-xl 3xl:text-2xl"
+        class="text-lg text-accent-600 md:text-xl 3xl:text-2xl"
         >Link</a
       >
     </div>

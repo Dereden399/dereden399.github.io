@@ -18,7 +18,9 @@ export const mySkills = [
   'React',
   'Vue.js',
   'SQL',
-  'React Native'
+  'React Native',
+  'OpenGL',
+  'Metal'
 ]
 
 export interface SchoolType {
@@ -127,10 +129,30 @@ const ProceduralImageGeneratorProject: ProjectInfoType = {
   link: 'https://github.com/Dereden399/procedural-image-generator'
 }
 
+const OpenGLRendererProject: ProjectInfoType = {
+  name: 'Simple OpenGL Renderer',
+  description:
+    'A simple OpenGL renderer that I developed to learn the basics of OpenGL and GLSL. The project features different computer graphics technics, such as texture maps, hierarchical modelling and bloom. I also experimented with different shaders to understand how they affect the scene. This project is open-source and available on GitHub.',
+  technologies: ['C++', 'OpenGL', 'GLSL'],
+  isPrivate: false,
+  link: 'https://github.com/Dereden399/simple-opengl-renderer'
+}
+
+const MetalRendererProject: ProjectInfoType = {
+  name: 'Simple Metal Renderer',
+  description:
+    'Metal/Swift variation of my OpenGL renderer. The project uses SwiftUI and works on MacOS and IOS. Renderer implements some of advanced features like multipass rendering and shadows.',
+  technologies: ['Swift', 'Metal', 'SwiftUI'],
+  isPrivate: false,
+  link: 'https://github.com/Dereden399/simple-metal-renderer'
+}
+
 export const projects = [
-  StudyScheduleProject,
-  PortfolioWebsiteProject,
+  BeamexAR,
   VoiceEmotionRecognitionProject,
+  OpenGLRendererProject,
+  MetalRendererProject,
+  StudyScheduleProject,
   ProceduralImageGeneratorProject,
-  BeamexAR
+  PortfolioWebsiteProject
 ]
