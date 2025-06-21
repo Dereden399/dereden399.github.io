@@ -17,6 +17,7 @@ import { scrollTo } from './utils.ts'
 </template>
 
 <style scoped>
+@reference "../styles.css";
 .link {
   @apply cursor-pointer text-base font-semibold text-slate-950 hover:text-slate-600;
 }

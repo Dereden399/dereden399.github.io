@@ -196,6 +196,8 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
+@reference "../styles.css";
+
 .year-circle {
   @apply h-[12px] w-[12px] rounded-full border-2 border-slate-950 md:m-[8px] md:h-[32px] md:w-[32px];
 }
