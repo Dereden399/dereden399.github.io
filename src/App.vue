@@ -8,6 +8,8 @@ import ProjectsSection from './components/ProjectsSection.vue'
 import ContactsSection from './components/ContactsSection.vue'
 import Footer from './components/Footer.vue'
 import SkillsSection from './components/SkillsSection.vue'
+import Header from './components/Header/Header.vue'
+import AboutMeSection from './components/AboutMeSection.vue'
 </script>
 
 <template>
@@ -22,19 +24,9 @@ import SkillsSection from './components/SkillsSection.vue'
     class="relative flex w-full flex-col items-center justify-center"
   >
     <div class="flex w-full flex-col items-center 3xl:max-w-[2400px]">
-      <div
-        class="flex w-full flex-col items-center justify-center gap-x-[48px] px-[8px] md:flex-row md:px-[64px]"
-        :style="`min-height: calc(100vh - ${navbarHeight});`"
-      >
-        <HeaderInfo />
-        <HeaderPhoto />
-      </div>
-      <div class="flex w-full flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
-        <h1 id="aboutMe" class="text-3xl text-slate-950">About me</h1>
-        <div
-          class="mt-2 text-center text-lg text-slate-950 md:mt-4 md:text-xl 3xl:text-2xl"
-          v-html="aboutMeDescription"
-        />
+      <Header />
+      <div class="flex flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
+        <AboutMeSection />
         <h1 class="mt-2 text-3xl text-slate-950 md:mt-4">My Skills</h1>
         <SkillsSection />
         <h1 class="mt-2 text-3xl text-slate-950 md:mt-4">My Education Path</h1>
