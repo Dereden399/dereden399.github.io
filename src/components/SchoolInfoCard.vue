@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import { navbarHeight, SchoolType } from '../constants.ts'
+import { SchoolType } from '../constants.ts'
 import PillElement from './PillElement.vue'
-import { ref } from 'vue'
 
 const { school } = defineProps<{ school: SchoolType }>()
-
-const headerRef = ref<HTMLDivElement | null>(null)
-const skillsRef = ref<HTMLDivElement | null>(null)
 </script>
 
 <template>
   <div
-    class="flex max-h-full w-full flex-col items-start rounded-2xl bg-white shadow-2xl"
+    class="flex h-fit w-[700px] shrink-0 snap-center flex-col items-start rounded-2xl bg-white shadow-2xl"
   >
     <div
-      ref="headerRef"
       class="flex w-full flex-row items-center justify-between rounded-tl-2xl rounded-tr-2xl bg-accent-50 p-[4px] text-center md:p-[8px]"
     >
       <div class="flex flex-col items-start justify-start text-center">
@@ -29,7 +24,6 @@ const skillsRef = ref<HTMLDivElement | null>(null)
     <div class="p-[8px]">
       <div
         class="overflow-y-auto text-base md:text-xl 3xl:text-2xl"
-        :style="`max-height: calc(100vh - ${headerRef ? headerRef.offsetHeight : 0}px - ${skillsRef ? skillsRef.offsetHeight : 0}px - ${navbarHeight} - 16vh)`"
         v-html="school.description"
       />
       <div ref="skillsRef">

@@ -27,9 +27,7 @@ import AboutMeSection from './components/AboutMeSection.vue'
       <Header />
       <div class="flex flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
         <AboutMeSection />
-        <h1 class="mt-2 text-3xl text-slate-950 md:mt-4">My Skills</h1>
         <SkillsSection />
-        <h1 class="mt-2 text-3xl text-slate-950 md:mt-4">My Education Path</h1>
         <EducationTimeLine />
         <h1 id="projects" class="mt-2 text-3xl text-slate-950 md:mt-4">
           Projects

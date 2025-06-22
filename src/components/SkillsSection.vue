@@ -4,6 +4,7 @@ import PillElement from './PillElement.vue'
 </script>
 
 <template>
+  <h1 class="mt-2 text-3xl text-slate-950 md:mt-4">My Skills</h1>
   <div
     class="mt-4 flex flex-row flex-wrap items-center justify-center gap-x-2 gap-y-2"
   >
