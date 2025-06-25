@@ -27,8 +27,9 @@ export interface SchoolType {
   name: string
   startYear: string
   endYear: string | null
-  gpa: string
+  gpa: string | null
   description: string
+  badges: string[]
   skills: string[]
 }
 
@@ -40,42 +41,63 @@ export interface ProjectInfoType {
   link?: string
 }
 
-const schoolDescription: SchoolType = {
-  name: 'Gymnasium 399',
-  startYear: '2019',
-  endYear: '2021',
-  gpa: '5.0',
-  description:
-    'My programming journey began early when I discovered a deep interest in coding and <b>competitive programming</b>. During high school, I participated in multiple coding challenges, winning many of them. These experiences sharpened my <b>problem-solving skills</b> and fueled my enthusiasm for technology.',
-  skills: ['C++', 'Python', 'Competitive programming']
-}
 const spbuDescription: SchoolType = {
   name: 'Saint-Petersburg State University',
   startYear: '2021',
   endYear: '2022',
   gpa: '4.5',
+  badges: ['B.S.', 'Dropped'],
   description:
-    'I spent a year studying <b>"Applied Math and Informatics"</b>, where I immersed myself in a variety of mathematical concepts, including <b>calculus</b>, <b>algebra</b>, <b>geometry</b>, and <b>discrete math</b>. This experience helped me build a solid foundation in <b>analytical thinking</b>. I also delved into low-level <b>C/C++</b> concepts, broadening my understanding beyond mathematics. Although I enjoyed the rigorous math curriculum, I realized my true passion lay in Computer Science. This led me to make a pivotal decision to pursue my interest further.',
-  skills: ['Linear Algebra', 'Calculus', 'Problem Solving', 'C/C++']
+    'Major <b>"Applied Math and Informatics"</b>. Courses included <b>calculus</b>, <b>algebra</b>, <b>geometry</b>, and <b>discrete math</b>. I also took courses about low-level <b>C/C++</b> concepts.',
+  skills: ['Linear Algebra', 'Calculus', 'Discrete math', 'C/C++']
 }
 const aaltoDescription: SchoolType = {
   name: 'Aalto University',
   startYear: '2022',
-  endYear: null,
+  endYear: '2025',
+  badges: ['B.S.'],
   gpa: '4.9',
   description:
-    "I'm currently studying <b>Computer Science</b> at Aalto University, where I've immersed myself in essential concepts such as <b>Data Structures and Algorithms</b>, <b>Parallel Computing</b>, and <b>Operating Systems</b>. I've completed numerous projects, with one being honored as one of the best in the course. Through my coursework and extracurricular activities, I've developed strong <b>teamwork</b>, <b>agile skills</b>, and essential <b>soft skills</b>. I've also actively participated in <b>hackathons</b>, winning one. My experiences here have made me <b>proficient in tackling real-world problems</b> with <b>innovative solutions</b>.",
+    'Major <b>Computer Science</b>. Have taken variety of CS courses, such as <b>Data Structures and Algorithms</b>, <b>Parallel Computing</b>, and <b>Operating Systems</b>. Completed numerous projects, with one being honored as one of the best in the course. Developed strong <b>teamwork</b>, <b>agile skills</b>, and essential <b>soft skills</b>. Actively participated in <b>hackathons</b>, winning one.',
   skills: [
     'Data Structures and Algorithms',
     'Parallel Computing',
+    'Computer Graphics',
+    'Web Development',
     'Teamwork',
     'Agile Methodologies',
-    'Soft skills',
-    'Scala'
+    'Soft skills'
   ]
 }
 
-export const schools = [schoolDescription, spbuDescription, aaltoDescription]
+const ntuDescription: SchoolType = {
+  name: 'Nanyang Technological University',
+  startYear: '2024',
+  endYear: '2024',
+  badges: ['Exchange'],
+  gpa: '4.5',
+  description:
+    'Exchange semester at NTU, Singapore. Courses included languages and CS related stuff.',
+  skills: ['Soft skills', 'Information Security', 'Embedded Systems']
+}
+
+const aaltoMastersDescription: SchoolType = {
+  name: 'Aalto University',
+  startYear: '2025',
+  endYear: null,
+  badges: ['M.S.'],
+  gpa: null,
+  description:
+    'Major <b>Machine Learning, Data Science and Artificial Intelligence</b>',
+  skills: []
+}
+
+export const schools = [
+  spbuDescription,
+  aaltoDescription,
+  ntuDescription,
+  aaltoMastersDescription
+]
 
 const StudyScheduleProject: ProjectInfoType = {
   name: 'Study Schedule',

@@ -7,7 +7,7 @@ const { school } = defineProps<{ school: SchoolType }>()
 
 <template>
   <div
-    class="flex h-fit w-[700px] shrink-0 snap-center flex-col items-start rounded-2xl bg-white shadow-2xl"
+    class="mb-8 flex h-fit w-[700px] shrink-0 snap-center flex-col items-start rounded-2xl bg-white shadow-2xl"
   >
     <div
       class="flex w-full flex-row items-center justify-between rounded-tl-2xl rounded-tr-2xl bg-accent-50 p-[4px] text-center md:p-[8px]"

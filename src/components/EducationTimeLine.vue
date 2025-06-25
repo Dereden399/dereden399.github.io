@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { schools, navbarHeight } from '../constants.ts'
+import { schools } from '../constants.ts'
 import SchoolInfoCard from './SchoolInfoCard.vue'
 import { ComponentPublicInstance, onBeforeUnmount, onMounted, ref } from 'vue'
 
@@ -88,10 +88,7 @@ onBeforeUnmount(() => {
 
 <template>
   <h1 class="text-3xl text-slate-950">My education</h1>
-  <div
-    :style="`height: calc(100vh - ${navbarHeight});`"
-    class="mt-2 flex flex-col items-center md:mt-4"
-  >
+  <div class="mt-2 flex flex-col items-center md:mt-4">
     <div class="flex flex-row items-center justify-evenly">
       <span class="year-circle-small"></span>
       <template v-for="(year, idx) in years" :key="year">
