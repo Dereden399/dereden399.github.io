@@ -18,35 +18,48 @@ const distances = [
 
 const carouselRef = ref<HTMLElement | null>(null)
 const cardRefs = ref<HTMLElement[]>([])
+const carouselCenter = ref(0)
 
-const centeredIndex = ref(0)
-const scrollProgress = ref(0)
+const selectedCardIndex = ref(0)
+
+const shouldASmallCircleBeSelected = (
+  cardIdx: number,
+  smallCircleIdx: number
+) => {
+  const cardElement = cardRefs.value[cardIdx]
+
+  if (!cardElement) return false
+
+  const zoneStartingPosition =
+    cardElement.offsetLeft +
+    cardElement.clientWidth / 2 -
+    cardElement.clientWidth * 0.05
+  const totalRange = cardElement.clientWidth * 0.95
+  const oneSegment = totalRange / distances[cardIdx]
+  const scrolledAmount = carouselCenter.value - zoneStartingPosition
+
+  return smallCircleIdx * oneSegment <= scrolledAmount
+}
 
 const onScroll = () => {
-  if (!carouselRef.value || cardRefs.value!.length === 0) return
+  if (!carouselRef.value || cardRefs.value.length === 0) return
+
   const container = carouselRef.value
-  const containerRect = container.getBoundingClientRect()
-  const containerCenter = containerRect.left + containerRect.width / 2
+  const viewCenter = container.scrollLeft + container.clientWidth / 2
+  carouselCenter.value = viewCenter
 
-  let closestIndex = 0
-  let closestDistance = Infinity
-
-  cardRefs.value!.forEach((card, index) => {
-    const cardRect = card!.getBoundingClientRect()
-    const cardCenter = cardRect.left + cardRect.width / 2
-    const distance = Math.abs(containerCenter - cardCenter)
-
-    if (distance < closestDistance) {
-      closestDistance = distance
-      closestIndex = index
+  const zoneStartingPositions = cardRefs.value.map(
+    (el) => el.offsetLeft + el.clientWidth / 2 - el.clientWidth * 0.05
+  )
+  let newIndex = 0
+  for (let i = 0; i < zoneStartingPositions.length; i++) {
+    if (viewCenter >= zoneStartingPositions[i]) {
+      newIndex = i
+    } else {
+      break
     }
-  })
-
-  centeredIndex.value = closestIndex
-
-  // Calculate scroll progress
-  const maxScroll = container.scrollWidth - container.clientWidth
-  scrollProgress.value = container.scrollLeft / maxScroll
+  }
+  selectedCardIndex.value = newIndex
 }
 
 const assignCardRef = (
@@ -86,7 +99,7 @@ onBeforeUnmount(() => {
           <div
             class="relative transition-all duration-500 ease-in-out"
             :class="
-              idx === centeredIndex || idx === centeredIndex + 1
+              idx === selectedCardIndex || idx === selectedCardIndex + 1
                 ? 'year-circle-selected'
                 : 'year-circle'
             "
@@ -94,7 +107,7 @@ onBeforeUnmount(() => {
             <p
               class="absolute -left-[8px] text-base md:text-lg"
               :class="
-                idx === centeredIndex || idx === centeredIndex + 1
+                idx === selectedCardIndex || idx === selectedCardIndex + 1
                   ? 'top-[12px]'
                   : 'top-[8px]'
               "
@@ -106,7 +119,14 @@ onBeforeUnmount(() => {
         <span
           v-for="n in distances[idx]"
           :key="`${year}-${n}`"
-          class="year-circle-small transition-all duration-500 ease-in-out"
+          class="transition-all duration-500 ease-in-out"
+          :class="
+            idx === selectedCardIndex
+              ? shouldASmallCircleBeSelected(idx, n)
+                ? 'year-circle-small-selected-now'
+                : 'year-circle-small-selected'
+              : 'year-circle-small'
+          "
         ></span>
       </template>
     </div>
