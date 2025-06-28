@@ -3,7 +3,7 @@ import { aboutMeDescription } from '../constants.ts'
 </script>
 
 <template>
-  <div class="flex flex-row items-center gap-x-8">
+  <div class="flex flex-row items-center gap-x-8 p-2 lg:max-w-[80%] lg:p-0">
     <img
       src="/picture2.webp"
       alt="Picture of a handsome guy"

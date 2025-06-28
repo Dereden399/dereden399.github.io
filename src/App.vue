@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import Navbar from './components/Navbar.vue'
-import HeaderPhoto from './components/Header/HeaderPhoto.vue'
-import HeaderInfo from './components/Header/HeaderInfo.vue'
-import { aboutMeDescription, navbarHeight } from './constants.ts'
+import { navbarHeight } from './constants.ts'
 import EducationTimeLine from './components/EducationTimeLine.vue'
 import ProjectsSection from './components/ProjectsSection.vue'
 import ContactsSection from './components/ContactsSection.vue'
@@ -25,14 +23,12 @@ import AboutMeSection from './components/AboutMeSection.vue'
   >
     <div class="flex w-full flex-col items-center 3xl:max-w-[2400px]">
       <Header />
-      <div class="flex flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
-        <AboutMeSection />
-        <SkillsSection />
-        <EducationTimeLine />
-        <h1 id="projects" class="mt-2 text-3xl text-slate-950 md:mt-4">
-          Projects
-        </h1>
-      </div>
+      <AboutMeSection />
+      <SkillsSection />
+      <EducationTimeLine />
+      <h1 id="projects" class="mt-2 text-3xl text-slate-950 md:mt-4">
+        Projects
+      </h1>
       <ProjectsSection />
       <div class="flex w-full flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
         <h1 id="contacts" class="mt-4 text-3xl text-slate-950 md:mt-6">

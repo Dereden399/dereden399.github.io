@@ -15,6 +15,22 @@ const distances = [
   ...years.slice(1).map((year, idx) => (year - years[idx]) * 3),
   0
 ]
+const totalDistanceForEachCard = schools.map((school) => {
+  const startYear = Number(school.startYear)
+  const endYear = school.endYear
+    ? Number(school.endYear)
+    : years[years.length - 1]
+  return years.reduce((acc, year) => {
+    if (year >= startYear && year < endYear) {
+      return acc + (distances[years.indexOf(year)] || 0)
+    }
+    return acc
+  }, 0)
+})
+const startingYearIndexForEachCard = schools.map((school) => {
+  const startYear = Number(school.startYear)
+  return years.findIndex((year) => year === startYear)
+})
 
 const carouselRef = ref<HTMLElement | null>(null)
 const cardRefs = ref<HTMLElement[]>([])
@@ -22,23 +38,38 @@ const carouselCenter = ref(0)
 
 const selectedCardIndex = ref(0)
 
-const shouldASmallCircleBeSelected = (
-  cardIdx: number,
-  smallCircleIdx: number
-) => {
-  const cardElement = cardRefs.value[cardIdx]
+const calculateSmallCircleClass = (smallCircleIdx: number, yearIdx: number) => {
+  const selectedCard = schools[selectedCardIndex.value]
+  const isSelectedYear =
+    years[yearIdx] >= Number(selectedCard.startYear) &&
+    years[yearIdx] < Number(selectedCard.endYear)
 
-  if (!cardElement) return false
+  if (!isSelectedYear) return 'year-circle-small'
 
+  const totalAmountOfSmallCircles =
+    totalDistanceForEachCard[selectedCardIndex.value]
+  let realSmallCircleIdx = smallCircleIdx
+  for (
+    let i = startingYearIndexForEachCard[selectedCardIndex.value];
+    i < yearIdx;
+    i += 1
+  ) {
+    realSmallCircleIdx += distances[i]
+  }
+  const selectedCardElement = cardRefs.value[selectedCardIndex.value]
+  if (!selectedCardElement) return 'year-circle-small'
   const zoneStartingPosition =
-    cardElement.offsetLeft +
-    cardElement.clientWidth / 2 -
-    cardElement.clientWidth * 0.05
-  const totalRange = cardElement.clientWidth * 0.95
-  const oneSegment = totalRange / distances[cardIdx]
+    selectedCardElement.offsetLeft +
+    selectedCardElement.clientWidth / 2 -
+    selectedCardElement.clientWidth * 0.05
+  const totalRange = selectedCardElement.clientWidth * 0.95
+  const oneSegment = totalRange / totalAmountOfSmallCircles
   const scrolledAmount = carouselCenter.value - zoneStartingPosition
-
-  return smallCircleIdx * oneSegment <= scrolledAmount
+  if (realSmallCircleIdx * oneSegment <= scrolledAmount) {
+    return 'year-circle-small-selected-now'
+  } else {
+    return 'year-circle-small-selected'
+  }
 }
 
 const onScroll = () => {
@@ -89,14 +120,15 @@ onBeforeUnmount(() => {
 <template>
   <h1 class="text-3xl text-slate-950">My education</h1>
   <div class="mt-2 flex flex-col items-center md:mt-4">
-    <div class="flex flex-row items-center justify-evenly">
+    <div class="timeline-container flex flex-row items-center justify-evenly">
       <span class="year-circle-small"></span>
       <template v-for="(year, idx) in years" :key="year">
         <div class="flex items-center">
           <div
             class="relative transition-all duration-500 ease-in-out"
             :class="
-              idx === selectedCardIndex || idx === selectedCardIndex + 1
+              year === Number(schools[selectedCardIndex].startYear) ||
+              year === Number(schools[selectedCardIndex].endYear)
                 ? 'year-circle-selected'
                 : 'year-circle'
             "
@@ -104,7 +136,8 @@ onBeforeUnmount(() => {
             <p
               class="absolute -left-[8px] text-base md:text-lg"
               :class="
-                idx === selectedCardIndex || idx === selectedCardIndex + 1
+                year === Number(schools[selectedCardIndex].startYear) ||
+                year === Number(schools[selectedCardIndex].endYear)
                   ? 'top-[12px]'
                   : 'top-[8px]'
               "
@@ -117,15 +150,10 @@ onBeforeUnmount(() => {
           v-for="n in distances[idx]"
           :key="`${year}-${n}`"
           class="transition-all duration-500 ease-in-out"
-          :class="
-            idx === selectedCardIndex
-              ? shouldASmallCircleBeSelected(idx, n)
-                ? 'year-circle-small-selected-now'
-                : 'year-circle-small-selected'
-              : 'year-circle-small'
-          "
+          :class="calculateSmallCircleClass(n, idx)"
         ></span>
       </template>
+      <span class="year-circle-small"></span>
     </div>
     <div
       ref="carouselRef"
@@ -143,98 +171,6 @@ onBeforeUnmount(() => {
       />
     </div>
   </div>
-  <!--  <div class="mt-4 w-full">
-    <div
-      ref="stickyElemRef"
-      class="sticky flex h-[90vh] w-full flex-col justify-start gap-y-6 md:flex-row md:gap-x-12 md:gap-y-0"
-      :style="`top: calc(${navbarHeight} + 2vh)`"
-    >
-      <div
-        class="flex min-w-12 flex-row items-center justify-evenly md:flex-[1] md:flex-col md:justify-start"
-      >
-        <span class="year-circle-small"></span>
-        <template v-for="(year, idx) in years" :key="year">
-          <div class="flex flex-col items-center md:ml-10 md:flex-row">
-            <div
-              class="relative transition-all duration-500 ease-in-out"
-              :class="
-                idx === shownSchool || idx === shownSchool + 1
-                  ? 'year-circle-selected'
-                  : 'year-circle'
-              "
-            >
-              <p
-                class="absolute -left-[8px] text-base md:hidden md:text-lg"
-                :class="
-                  idx === shownSchool || idx === shownSchool + 1
-                    ? 'top-[12px]'
-                    : 'top-[8px]'
-                "
-              >
-                {{ year }}
-              </p>
-            </div>
-            <p class="hidden text-base md:block md:text-lg">
-              {{ year }}
-            </p>
-          </div>
-          <span
-            v-for="n in distances[idx]"
-            :key="`${year}-${n}`"
-            class="transition-all duration-500 ease-in-out"
-            :class="
-              idx === shownSchool
-                ? scrolledPercentageInOneNth >= n / distances[idx]
-                  ? 'year-circle-small-selected-now'
-                  : 'year-circle-small-selected'
-                : 'year-circle-small'
-            "
-            @click="scrollToSection(idx)"
-          ></span>
-        </template>
-        <span
-          class="transition-all duration-500 ease-in-out"
-          :class="
-            shownSchool == schools.length - 1
-              ? scrolledPercentageInOneNth >= 0.3
-                ? 'year-circle-small-selected-now'
-                : 'year-circle-small-selected'
-              : 'year-circle-small'
-          "
-          @click="scrollToSection(schools.length - 1)"
-        ></span>
-        <span
-          class="transition-all duration-500 ease-in-out"
-          :class="
-            shownSchool == schools.length - 1
-              ? scrolledPercentageInOneNth >= 0.6
-                ? 'year-circle-small-selected-now'
-                : 'year-circle-small-selected'
-              : 'year-circle-small'
-          "
-          @click="scrollToSection(schools.length - 1)"
-        ></span>
-      </div>
-
-      <div class="flex flex-col justify-start md:mt-[10vh] md:flex-[2]">
-        <SchoolInfoCard
-          :school="schools[shownSchool]"
-        />
-      </div>
-
-      <div
-        class="absolute bottom-0 right-0 origin-bottom-right md:hidden"
-        :class="`${scrolledAmount > educationTimelineSize - (stickyElemRef ? stickyElemRef.offsetHeight : 0) && 'hidden'}`"
-      >
-        <div class="flex flex-col items-center">
-          <svg width="70" height="70">
-            <image xlink:href="/scroll-indicator.svg" height="70" width="70" />
-          </svg>
-          <p>Scroll vertically</p>
-        </div>
-      </div>
-    </div>
-  </div>-->
 </template>
 
 <style scoped>
@@ -246,6 +182,10 @@ onBeforeUnmount(() => {
 
 .year-circle-selected {
   @apply h-[20px] w-[20px] rounded-full border-2 border-slate-950 bg-accent-300 md:m-[8px] md:h-[48px] md:w-[48px];
+}
+
+.timeline-container {
+  @apply h-[20px] md:h-[48px];
 }
 
 .year-circle-small {
