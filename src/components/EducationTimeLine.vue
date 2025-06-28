@@ -134,12 +134,12 @@ onBeforeUnmount(() => {
             "
           >
             <p
-              class="absolute -left-[8px] text-base md:text-lg"
+              class="absolute text-base transition-all md:text-lg"
               :class="
                 year === Number(schools[selectedCardIndex].startYear) ||
                 year === Number(schools[selectedCardIndex].endYear)
-                  ? 'top-[12px]'
-                  : 'top-[8px]'
+                  ? 'top-[45px]'
+                  : 'top-[30px]'
               "
             >
               {{ year }}
