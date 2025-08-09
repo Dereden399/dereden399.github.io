@@ -3,11 +3,13 @@ import { aboutMeDescription } from '../constants.ts'
 </script>
 
 <template>
-  <div class="flex flex-row items-center gap-x-8 p-2 lg:max-w-[80%] lg:p-0">
+  <div
+    class="flex flex-col items-center gap-x-8 p-2 md:flex-row lg:max-w-[80%] lg:p-0"
+  >
     <img
       src="/picture2.webp"
       alt="Picture of a handsome guy"
-      class="aspect-auto w-[30rem] rounded-xl"
+      class="aspect-auto w-[30rem] max-w-[90%] rounded-xl"
     />
     <div>
       <h1 id="aboutMe" class="text-3xl text-slate-950">About me</h1>

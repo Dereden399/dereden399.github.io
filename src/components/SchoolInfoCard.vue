@@ -7,19 +7,35 @@ const { school } = defineProps<{ school: SchoolType }>()
 
 <template>
   <div
-    class="mb-8 flex h-fit w-[700px] shrink-0 snap-center flex-col items-start rounded-2xl bg-white shadow-2xl"
+    class="mb-8 flex h-fit w-[98%] shrink-0 snap-center flex-col items-start rounded-2xl bg-white shadow-2xl md:w-[700px]"
   >
     <div
       class="flex w-full flex-row items-center justify-between rounded-tl-2xl rounded-tr-2xl bg-accent-50 p-[4px] text-center md:p-[8px]"
     >
       <div class="flex flex-col items-start justify-start text-center">
-        <h1 class="text-base text-accent-600 md:text-3xl">{{ school.name }}</h1>
+        <h1 class="text-base text-accent-600 md:text-3xl">
+          {{ school.name }}
+        </h1>
         <small class="text-sm text-accent-500 md:text-xl"
           >{{ school.startYear }} -
           {{ school.endYear ? school.endYear : 'present.' }}</small
         >
+        <div class="flex gap-x-2">
+          <span
+            v-for="badge in school.badges"
+            :key="badge"
+            class="rounded-full bg-violet-500 px-2 py-1 text-sm text-white"
+          >
+            {{ badge }}
+          </span>
+        </div>
       </div>
-      <h2 class="text-sm text-accent-600 md:text-3xl">GPA: {{ school.gpa }}</h2>
+      <h2
+        v-if="school.gpa !== null"
+        class="text-sm text-accent-600 md:text-3xl"
+      >
+        GPA: {{ school.gpa }}
+      </h2>
     </div>
     <div class="p-[8px]">
       <div

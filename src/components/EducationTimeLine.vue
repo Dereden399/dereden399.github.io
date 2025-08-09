@@ -72,6 +72,21 @@ const calculateSmallCircleClass = (smallCircleIdx: number, yearIdx: number) => {
   }
 }
 
+const scrollByPage = (direction: 'left' | 'right') => {
+  if (cardRefs.value.length === 0) return
+  const max = schools.length - 1
+  let target = selectedCardIndex.value + (direction === 'left' ? -1 : 1)
+  target = Math.max(0, Math.min(max, target))
+  const el = cardRefs.value[target]
+  if (el) {
+    el.scrollIntoView({
+      behavior: 'smooth',
+      inline: 'center',
+      block: 'nearest'
+    })
+  }
+}
+
 const onScroll = () => {
   if (!carouselRef.value || cardRefs.value.length === 0) return
 
@@ -120,8 +135,10 @@ onBeforeUnmount(() => {
 <template>
   <h1 class="text-3xl text-slate-950">My education</h1>
   <div class="mt-2 flex flex-col items-center md:mt-4">
-    <div class="timeline-container flex flex-row items-center justify-evenly">
-      <span class="year-circle-small"></span>
+    <div
+      class="timeline-container flex w-full max-w-[35rem] flex-row items-center justify-evenly"
+    >
+      <span class="year-circle-small" />
       <template v-for="(year, idx) in years" :key="year">
         <div class="flex items-center">
           <div
@@ -134,12 +151,12 @@ onBeforeUnmount(() => {
             "
           >
             <p
-              class="absolute text-base transition-all md:text-lg"
+              class="absolute -left-[50%] text-base transition-all md:left-0 md:text-lg"
               :class="
                 year === Number(schools[selectedCardIndex].startYear) ||
                 year === Number(schools[selectedCardIndex].endYear)
-                  ? 'top-[45px]'
-                  : 'top-[30px]'
+                  ? 'top-[15px] md:top-[45px]'
+                  : 'top-[10px] md:top-[30px]'
               "
             >
               {{ year }}
@@ -151,24 +168,62 @@ onBeforeUnmount(() => {
           :key="`${year}-${n}`"
           class="transition-all duration-500 ease-in-out"
           :class="calculateSmallCircleClass(n, idx)"
-        ></span>
+        />
       </template>
-      <span class="year-circle-small"></span>
+      <span class="year-circle-small" />
     </div>
     <div
       ref="carouselRef"
-      class="flex w-screen flex-1 snap-x snap-mandatory flex-row gap-x-16 overflow-x-scroll scroll-smooth px-[calc(50vw-350px)] py-8"
-      style="
-        scroll-padding-left: calc(50vw - 350px);
-        scroll-padding-right: calc(50vw - 350px);
-      "
+      class="carousel-container flex w-screen flex-1 snap-x snap-mandatory flex-row gap-x-16 overflow-x-scroll scroll-smooth py-8"
     >
       <SchoolInfoCard
         v-for="(school, idx) in schools"
-        :school="school"
         :key="school.name"
         :ref="(el) => assignCardRef(el, idx)"
+        :school="school"
       />
+    </div>
+    <div class="mt-4 flex flex-row gap-x-8">
+      <button
+        class="cursor-pointer items-center justify-center rounded-full border bg-white p-2 shadow-md hover:bg-slate-100"
+        aria-label="Scroll left"
+        @click="scrollByPage('left')"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-slate-800"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+      <button
+        class="cursor-pointer items-center justify-center rounded-full border bg-white p-2 shadow-md hover:bg-slate-100"
+        aria-label="Scroll right"
+        @click="scrollByPage('right')"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6 text-slate-800"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
     </div>
   </div>
 </template>
@@ -190,6 +245,20 @@ onBeforeUnmount(() => {
 
 .year-circle-small {
   @apply h-[6px] w-[6px] rounded-full bg-slate-950 md:m-[6px] md:h-[8px] md:w-[8px];
+}
+
+.carousel-container {
+  --dynamic-padding: calc(50vw - 47.5%);
+  padding-left: var(--dynamic-padding, 50vw);
+  padding-right: var(--dynamic-padding, 50vw);
+  scroll-padding-left: var(--dynamic-padding, 50vw);
+  scroll-padding-right: var(--dynamic-padding, 50vw);
+}
+
+@media (min-width: 768px) {
+  .carousel-container {
+    --dynamic-padding: calc(50vw - 350px);
+  }
 }
 
 .year-circle-small-selected {

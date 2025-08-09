@@ -2,11 +2,9 @@ export const navbarHeight = '2rem'
 
 export const navbarHeightNum = 2
 
-export const educationTimelineSize = 4000
-
 export const aboutMeDescription =
-  "<p>I'm an <b>ambitious programmer</b> and current student at Aalto University. With many years of experience in <b>full-stack web development</b> and <b>mobile software development</b>, I have a passion for creating innovative and efficient solutions. My expertise extends to a variety of technologies, including <b>C++</b>, <b>Scala</b>, and <b>Python</b>, making me a versatile and well-rounded developer.</p>" +
-  '<p>I consider myself a well-rounded specialist, with a strong interest in numerous coding-related technologies. My curiosity and enthusiasm drive me to explore different areas, from <b>graphic engineering</b> to <b>machine learning</b>. This curiosity helps me approach problems from various angles and develop comprehensive solutions that make the most of the latest tech advancements</p>'
+  "<p>I'm an <b>ambitious programmer</b> and current student at Aalto University, with many years of experience in <b>full-stack web development</b> and a growing focus on <b>applied and research-driven machine learning</b>. I’m passionate about building innovative, efficient solutions that bridge theory and practice. My technical background spans a range of languages and frameworks, including <b>C++</b>, <b>Scala</b>, and <b>Python</b>, giving me the versatility to tackle complex challenges from multiple angles.</p>" +
+  "<p>I consider myself a well-rounded specialist, with a strong interest in numerous coding-related technologies. My curiosity and enthusiasm drive me to explore different areas, from <b>graphic engineering</b> to <b>machine learning</b>. I'm especially interested in the AI/ML, exploring new techniques and experimenting with models. This curiosity helps me approach problems from various angles and develop comprehensive solutions that make the most of the latest tech advancements.</p>"
 
 export const mySkills = [
   'Typescript',
@@ -56,7 +54,7 @@ const aaltoDescription: SchoolType = {
   startYear: '2022',
   endYear: '2025',
   badges: ['B.S.'],
-  gpa: '4.9',
+  gpa: '4.85',
   description:
     'Major <b>Computer Science</b>. Have taken variety of CS courses, such as <b>Data Structures and Algorithms</b>, <b>Parallel Computing</b>, and <b>Operating Systems</b>. Completed numerous projects, with one being honored as one of the best in the course. Developed strong <b>teamwork</b>, <b>agile skills</b>, and essential <b>soft skills</b>. Actively participated in <b>hackathons</b>, winning one.',
   skills: [
