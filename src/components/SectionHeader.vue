@@ -3,9 +3,9 @@ defineProps<{ title: string }>()
 </script>
 
 <template>
-  <div class="mb-9">
+  <div class="mb-7 lg:mb-9">
     <h2
-      class="font-display text-header font-semibold leading-none text-neutral-900"
+      class="font-display text-header font-semibold leading-none text-ink dark:text-ink-dark"
     >
       {{ title }}
     </h2>

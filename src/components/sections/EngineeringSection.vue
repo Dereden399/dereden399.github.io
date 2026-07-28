@@ -8,9 +8,9 @@ const cards = engProjects.map((project) => ({ project, ...useScrollReveal() }))
 </script>
 
 <template>
-  <section id="engineering" class="mb-20">
+  <section id="engineering" class="mb-16 lg:mb-20">
     <SectionHeader index="03" title="Engineering" />
-    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <div class="3xl:grid-cols-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
       <div
         v-for="card in cards"
         :key="card.project.title"

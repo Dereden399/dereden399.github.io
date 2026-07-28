@@ -32,6 +32,8 @@ export interface ExperienceEntry {
   end: number
 }
 
+export const HERO_BG = 0x0c0a1e
+
 export const name = 'Denis Kuznetsov'
 
 export const tagline =

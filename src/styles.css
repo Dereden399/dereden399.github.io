@@ -1,12 +1,36 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --breakpoint-3xl: 120rem; /* 1920px */
+    --breakpoint-4xl: 160rem; /* 2560px */
+    --breakpoint-5xl: 240rem; /* 3840px */
+}
+
 html {
     scroll-behavior: smooth;
 }
 
 body {
-    @apply bg-white font-body text-neutral-900;
+    @apply bg-page dark:bg-page-dark font-body text-ink dark:text-ink-dark;
+}
+
+:root {
+    --tl-dot: #32a894;
+    --tl-idle: #d4d4d4;
+    --tl-active: #0f766e;
+    --card-shadow: 0 14px 30px rgba(15, 118, 110, 0.14);
+    --noise-opacity: 0.035;
+}
+
+.dark {
+    --tl-dot: #4dbfa9;
+    --tl-idle: #33333f;
+    --tl-active: #4dbfa9;
+    --card-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+    --noise-opacity: 0.018;
 }
 
 @keyframes fade-up {
@@ -48,10 +72,35 @@ body {
     transform: translateY(0);
 }
 
+.nav-shell {
+    --nav-pad: clamp(0.5rem, 3vh, 2.75rem);
+    --nav-gap: clamp(0.25rem, 1.9vh, 1.625rem);
+    --nav-avatar: clamp(2.25rem, 12vh, 8rem);
+    --nav-avatar-mb: clamp(0.25rem, 1.3vh, 0.875rem);
+    --nav-item-pad: clamp(0rem, 0.9vh, 0.625rem);
+    --nav-link-gap: clamp(0.1rem, 0.9vh, 0.625rem);
+    --nav-cv-pad: clamp(0.25rem, 1.1vh, 0.625rem);
+}
+
+@media (max-height: 30rem) {
+    .nav-shell .photo-treated {
+        display: none;
+    }
+
+    .nav-shell .nav-role {
+        line-height: 1.4;
+    }
+}
+
 .photo-treated {
     position: relative;
     overflow: hidden;
     isolation: isolate;
+}
+
+.proj-card:hover,
+.proj-card:active {
+    box-shadow: var(--card-shadow);
 }
 
 .timeline-circle {
@@ -59,13 +108,13 @@ body {
 }
 
 .scroll-reveal.is-visible .timeline-circle {
-    background-color: #32a894;
+    background-color: var(--tl-dot);
     transform: scale(1.12);
 }
 
 .timeline-connector {
     --timeline-dots: 3;
-    color: #d4d4d4;
+    color: var(--tl-idle);
     background-image: radial-gradient(
         circle at center,
         currentColor 2.4px,
@@ -78,7 +127,7 @@ body {
 }
 
 .scroll-reveal.is-visible .timeline-connector {
-    color: #0f766e;
+    color: var(--tl-active);
 }
 
 body::after {
@@ -87,7 +136,27 @@ body::after {
     inset: 0;
     z-index: 50;
     pointer-events: none;
-    opacity: 0.035;
+    opacity: var(--noise-opacity);
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .scroll-reveal,
+    .timeline-circle,
+    .timeline-connector,
+    .animate-fade-up,
+    .animate-fade-in {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+    }
 }

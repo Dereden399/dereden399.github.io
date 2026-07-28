@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
 import * as THREE from 'three'
-import { email, github, linkedin, name, roleTyped, tagline } from '../constants'
+import {
+  HERO_BG,
+  email,
+  github,
+  linkedin,
+  name,
+  roleTyped,
+  tagline
+} from '../constants'
 import { useThreeScene } from '../composables/useThreeScene'
 
 const typed = ref('')
@@ -9,15 +17,17 @@ const typed = ref('')
 let typeTimeout: ReturnType<typeof setTimeout> | undefined
 let typeInterval: ReturnType<typeof setInterval> | undefined
 
+// rebuildLinks() below is O(N²) per frame, so phones get a much smaller field.
 const particleCount = (width: number): number => {
-  if (width < 640) return 110
-  if (width < 1024) return 160
+  if (width < 400) return 55
+  if (width < 640) return 70
+  if (width < 1024) return 150
   return 220
 }
 
 const { setTarget } = useThreeScene({
   cameraZ: 4.5,
-  clearColor: 0x0c0a1e,
+  clearColor: HERO_BG,
   setup: ({ scene, width }) => {
     const N = particleCount(width)
     const pos = new Float32Array(N * 3)
@@ -143,47 +153,53 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative h-[110vh] overflow-hidden bg-[#0c0a1e]">
+  <div
+    class="relative min-h-[calc(100svh-3.5rem)] overflow-hidden bg-hero lg:h-[110vh]"
+  >
     <div :ref="setTarget" class="absolute inset-0 h-full w-full"></div>
     <div
-      class="pointer-events-none absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-white"
+      class="pointer-events-none absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-b from-transparent to-page dark:to-page-dark"
     ></div>
-    <div class="absolute bottom-36 left-16 right-16">
-      <h1
-        class="animate-fade-up mb-3.5 font-display text-display font-semibold leading-none tracking-tight text-white"
-      >
-        {{ name }}
-      </h1>
-      <div
-        class="animate-fade-in mb-5 min-h-5 font-mono text-label uppercase tracking-[0.14em] text-accent-300"
-      >
-        {{ typed }}<span class="opacity-60">_</span>
-      </div>
-      <p
-        class="animate-fade-up max-w-[520px] text-body text-white/70"
-        style="animation-delay: 0.48s"
-      >
-        {{ tagline }}
-      </p>
-      <div
-        class="animate-fade-up mt-6.5 gap-5.5 flex flex-wrap"
-        style="animation-delay: 0.7s"
-      >
-        <a
-          :href="'mailto:' + email"
-          class="border-accent-300/28 border-b pb-0.5 font-mono text-label tracking-wide text-accent-300"
-          >{{ email }}</a
+    <div
+      class="absolute bottom-16 left-5 right-5 sm:bottom-24 sm:left-8 sm:right-8 lg:bottom-36 lg:left-16 lg:right-16"
+    >
+      <div class="mx-auto max-w-[1400px]">
+        <h1
+          class="animate-fade-up mb-3.5 font-display text-display font-semibold leading-[1.05] tracking-tight text-white"
         >
-        <a
-          :href="'https://github.com/' + github"
-          class="border-accent-300/28 border-b pb-0.5 font-mono text-label tracking-wide text-accent-300"
-          >github/{{ github }}</a
+          {{ name }}
+        </h1>
+        <div
+          class="animate-fade-in mb-5 min-h-5 font-mono text-label uppercase tracking-[0.14em] text-accent-300"
         >
-        <a
-          :href="'https://linkedin.com/in/' + linkedin"
-          class="border-accent-300/28 border-b pb-0.5 font-mono text-label tracking-wide text-accent-300"
-          >linkedin/{{ linkedin }}</a
+          {{ typed }}<span class="opacity-60">_</span>
+        </div>
+        <p
+          class="animate-fade-up max-w-[520px] text-body text-white/70"
+          style="animation-delay: 0.48s"
         >
+          {{ tagline }}
+        </p>
+        <div
+          class="animate-fade-up mt-6.5 gap-x-5.5 flex flex-wrap gap-y-3"
+          style="animation-delay: 0.7s"
+        >
+          <a
+            :href="'mailto:' + email"
+            class="border-accent-300/28 break-all border-b pb-0.5 font-mono text-label tracking-wide text-accent-300"
+            >{{ email }}</a
+          >
+          <a
+            :href="'https://github.com/' + github"
+            class="border-accent-300/28 break-all border-b pb-0.5 font-mono text-label tracking-wide text-accent-300"
+            >github/{{ github }}</a
+          >
+          <a
+            :href="'https://linkedin.com/in/' + linkedin"
+            class="border-accent-300/28 break-all border-b pb-0.5 font-mono text-label tracking-wide text-accent-300"
+            >linkedin/{{ linkedin }}</a
+          >
+        </div>
       </div>
     </div>
   </div>
