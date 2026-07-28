@@ -53,7 +53,9 @@ const toggleTheme = (): void => {
       STORAGE_KEY,
       JSON.stringify({ theme: theme.value, system: systemTheme() })
     )
-  } catch {}
+  } catch {
+    // oh well
+  }
 }
 
 export const useTheme = (): {

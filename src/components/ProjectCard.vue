@@ -10,7 +10,13 @@ withDefaults(
     linkLabel?: string
     variant?: 'ml' | 'engineering'
   }>(),
-  { variant: 'engineering' }
+  {
+    variant: 'engineering',
+    subtitle: undefined,
+    highlight: undefined,
+    link: undefined,
+    linkLabel: undefined
+  }
 )
 </script>
 
