@@ -1,178 +1,191 @@
-export const navbarHeight = '2rem'
-
-export const navbarHeightNum = 2
-
-export const aboutMeDescription =
-  "<p>I'm an <b>ambitious programmer</b> and current student at Aalto University, with many years of experience in <b>full-stack web development</b> and a growing focus on <b>applied and research-driven machine learning</b>. I’m passionate about building innovative, efficient solutions that bridge theory and practice. My technical background spans a range of languages and frameworks, including <b>C++</b>, <b>Scala</b>, and <b>Python</b>, giving me the versatility to tackle complex challenges from multiple angles.</p>" +
-  "<p>I consider myself a well-rounded specialist, with a strong interest in numerous coding-related technologies. My curiosity and enthusiasm drive me to explore different areas, from <b>graphic engineering</b> to <b>machine learning</b>. I'm especially interested in the AI/ML, exploring new techniques and experimenting with models. This curiosity helps me approach problems from various angles and develop comprehensive solutions that make the most of the latest tech advancements.</p>"
-
-export const mySkills = [
-  'Typescript',
-  'Javascript',
-  'C++',
-  'Scala',
-  'Python',
-  'Swift',
-  'React',
-  'Vue.js',
-  'SQL',
-  'React Native',
-  'OpenGL',
-  'Metal'
-]
-
-export interface SchoolType {
-  name: string
-  startYear: string
-  endYear: string | null
-  gpa: string | null
+export interface MLProject {
+  id: string
+  title: string
+  subtitle: string
   description: string
-  badges: string[]
-  skills: string[]
+  tags: string[]
+  highlight: string
+  link: string | null
 }
 
-export interface ProjectInfoType {
-  name: string
+export interface EngProject {
+  title: string
   description: string
-  technologies: string[]
-  isPrivate: boolean
+  tags: string[]
   link?: string
 }
 
-const spbuDescription: SchoolType = {
-  name: 'Saint-Petersburg State University',
-  startYear: '2021',
-  endYear: '2022',
-  gpa: '4.5',
-  badges: ['B.S.', 'Dropped'],
-  description:
-    'Major <b>"Applied Math and Informatics"</b>. Courses included <b>calculus</b>, <b>algebra</b>, <b>geometry</b>, and <b>discrete math</b>. I also took courses about low-level <b>C/C++</b> concepts.',
-  skills: ['Linear Algebra', 'Calculus', 'Discrete math', 'C/C++']
-}
-const aaltoDescription: SchoolType = {
-  name: 'Aalto University',
-  startYear: '2022',
-  endYear: '2025',
-  badges: ['B.S.'],
-  gpa: '4.85',
-  description:
-    'Major <b>Computer Science</b>. Have taken variety of CS courses, such as <b>Data Structures and Algorithms</b>, <b>Parallel Computing</b>, and <b>Operating Systems</b>. Completed numerous projects, with one being honored as one of the best in the course. Developed strong <b>teamwork</b>, <b>agile skills</b>, and essential <b>soft skills</b>. Actively participated in <b>hackathons</b>, winning one.',
-  skills: [
-    'Data Structures and Algorithms',
-    'Parallel Computing',
-    'Computer Graphics',
-    'Web Development',
-    'Teamwork',
-    'Agile Methodologies',
-    'Soft skills'
-  ]
+export interface TimelineEntry {
+  year: string
+  role: string
+  org: string
+  detail: string
+  badge?: string
 }
 
-const ntuDescription: SchoolType = {
-  name: 'Nanyang Technological University',
-  startYear: '2024',
-  endYear: '2024',
-  badges: ['Exchange'],
-  gpa: '4.5',
-  description:
-    'Exchange semester at NTU, Singapore. Courses included languages and CS related stuff.',
-  skills: ['Soft skills', 'Information Security', 'Embedded Systems']
+export interface ExperienceEntry {
+  role: string
+  org: string
+  detail: string
+  dateLabel: string
+  start: number
+  end: number
 }
 
-const aaltoMastersDescription: SchoolType = {
-  name: 'Aalto University',
-  startYear: '2025',
-  endYear: null,
-  badges: ['M.S.'],
-  gpa: null,
-  description:
-    'Major <b>Machine Learning, Data Science and Artificial Intelligence</b>',
-  skills: []
-}
+export const name = 'Denis Kuznetsov'
 
-export const schools = [
-  spbuDescription,
-  aaltoDescription,
-  ntuDescription,
-  aaltoMastersDescription
+export const tagline =
+  'I like building things that work. Some of them write, draw, and see.'
+
+export const roleTyped = 'ML Engineer and Researcher · Software Engineer'
+
+export const sidebarRole = 'ML ENGINEER · FULL-STACK DEV\nAALTO UNIVERSITY'
+
+export const about =
+  "I'm an M.Sc. student in Machine Learning, Data Science & AI at Aalto University, with hands-on experience deploying AI features to production systems used by thousands of people. I've built and shipped end-to-end ML pipelines, from data preprocessing and model training to integration into real applications, and bring several years of full-stack engineering experience building scalable, production-grade systems. I like working across the whole lifecycle of applied ML: ideation, implementation, deployment, and iteration."
+
+export const resumeUrl = encodeURI('/Resume.pdf')
+
+export const email = 'denisk399@gmail.com'
+export const github = 'dereden399'
+export const linkedin = 'dereden'
+
+export const mlProjects: MLProject[] = [
+  {
+    id: 'thesis',
+    title: 'Real-Time Methods for Enhancing Image Quality in Computer Graphics',
+    subtitle: "Bachelor's Thesis · Aalto University · 2025",
+    description:
+      'Literature review of different approaches for real-time image quality enhancement in computer graphics, including both older traditional techniques and newer ML approaches. Reviewed how these methods trade off quality, latency, and compute for production real-time use.',
+    tags: ['Computer Graphics', 'Real-Time Rendering', 'Super-Resolution'],
+    highlight: 'Supervised by Jaakko Lehtinen (Aalto / NVIDIA) · top grade',
+    link: null
+  },
+  {
+    id: 'toxicity',
+    title: 'Multilingual Toxicity Detection',
+    subtitle: 'Aalto University · Course Project · 2026',
+    description:
+      'Team research project investigating toxicity detection for languages absent from standard training corpora, under strict compute constraints. Explored cross-lingual transfer learning with multilingual models (mBERT, XLM-R) in zero-shot and few-shot settings - target languages had zero labeled training samples. Compared performance of different methods.',
+    tags: ['Python', 'NLP', 'HuggingFace', 'Zero-shot', 'XLM-RoBERTa'],
+    highlight: 'Zero labeled samples in target languages',
+    link: null
+  },
+  {
+    id: 'emotion',
+    title: 'Voice Emotion Recognition',
+    subtitle: 'Course Project · 2023',
+    description:
+      'Built a neural network model achieving 80% accuracy classifying 8 emotions from voice samples.',
+    tags: ['Audio ML', 'Python'],
+    highlight: '~80% accuracy across 7 emotion classes',
+    link: 'https://github.com/Dereden399/voice-emotion-recognition'
+  }
 ]
 
-const StudyScheduleProject: ProjectInfoType = {
-  name: 'Study Schedule',
-  description:
-    'A full-stack web application to plan study schedules, employing best practices like automated testing and containerized development. Features a responsive mobile-first design and dark theme, utilizing Chakra UI',
-  technologies: [
-    'Typescript',
-    'React',
-    'CI/CD',
-    'MongoDB',
-    'Express',
-    'Redux',
-    'Cypress'
-  ],
-  isPrivate: false,
-  link: 'https://github.com/Dereden399/study-schedule-project'
-}
+export const engProjects: EngProject[] = [
+  {
+    title: 'BeamexAR',
+    description:
+      'AR mobile app guiding industrial calibration specialists. Team project over a full academic year, using Scrum; received excellent grade.',
+    tags: ['React Native', 'TypeScript', 'AR']
+  },
+  {
+    title: 'OpenGL Renderer',
+    description:
+      'Graphics engine with texture maps, hierarchical modelling, bloom, and custom GLSL shaders.',
+    tags: ['C++', 'OpenGL', 'GLSL'],
+    link: 'https://github.com/Dereden399/simple-opengl-renderer'
+  },
+  {
+    title: 'Metal Renderer',
+    description:
+      'macOS/iOS graphics with multipass rendering and shadow mapping in Swift and Metal.',
+    tags: ['Swift', 'Metal', 'SwiftUI'],
+    link: 'https://github.com/Dereden399/simple-metal-renderer'
+  },
+  {
+    title: 'Study Schedule',
+    description:
+      'Full-stack app with automated testing, containerised development, and Redux state management.',
+    tags: ['TypeScript', 'React', 'MongoDB', 'CI/CD'],
+    link: 'https://github.com/Dereden399/study-schedule-project'
+  },
+  {
+    title: 'Procedural Image Gen.',
+    description:
+      'ScalaFX app generating procedural images from user-defined JSON rules and assets',
+    tags: ['Scala', 'ScalaFX', 'UML'],
+    link: 'https://github.com/Dereden399/procedural-image-generator'
+  }
+]
 
-const PortfolioWebsiteProject: ProjectInfoType = {
-  name: 'My Portfolio Website',
-  description:
-    'While this project may not be as technologically sophisticated as others, it was built with entirely new technologies for me, showcasing my ability to adapt and learn quickly. The site features a clean, minimalistic design and is fully responsive, ensuring a good experience across different screen sizes',
-  technologies: ['Typescript', 'Vue.js'],
-  isPrivate: false,
-  link: 'https://github.com/Dereden399/resume-website'
-}
+export const education: TimelineEntry[] = [
+  {
+    year: '2025 –',
+    role: 'M.Sc. Machine Learning, Data Science & AI',
+    org: 'Aalto University',
+    detail: "Master's Programme",
+    badge: 'M.Sc.'
+  },
+  {
+    year: '2022 – 25',
+    role: 'B.Sc. Computer Science',
+    org: 'Aalto University',
+    detail: 'GPA 4.85 / 5.0',
+    badge: 'B.Sc.'
+  },
+  {
+    year: '2024',
+    role: 'Exchange Semester',
+    org: 'Nanyang Technological University',
+    detail: 'Singapore',
+    badge: 'Exchange'
+  },
+  {
+    year: '2021 – 22',
+    role: 'B.Sc. Applied Mathematics & Informatics',
+    org: 'Saint-Petersburg State University',
+    detail: 'Transferred to Aalto',
+    badge: 'Dropped'
+  }
+]
 
-const VoiceEmotionRecognitionProject: ProjectInfoType = {
-  name: 'Voice Emotion Recognition',
-  description:
-    'My first steps in Machine Learning. A research project, that studies an accuracy of different approaches to classify emotions based on audio sample with a notable 80% accuracy. The project comes with a small PDF article you can read for more details',
-  technologies: ['Python', 'Tensorflow', 'Keras', 'Numpy'],
-  isPrivate: false,
-  link: 'https://github.com/Dereden399/voice-emotion-recognition'
-}
-
-const BeamexAR: ProjectInfoType = {
-  name: 'BeamexAR',
-  description:
-    'A Proof of Concept mobile application for Beamex that I developed with a team over an entire year during a Software Project course. This innovative app uses augmented reality (AR) to guide specialists during the calibration process. It was executed using Scrum techniques and received an excellent grade.',
-  technologies: ['Typescript', 'React Native', 'Scrum', 'Figma', 'CI/CD'],
-  isPrivate: true
-}
-
-const ProceduralImageGeneratorProject: ProjectInfoType = {
-  name: 'Procedural Image Generator',
-  description:
-    'A ScalaFX app that generates procedural images based on user-defined JSON rules. Users can customize shapes, colors, and other parameters to create unique images from imported tiles. The UI features native macOS design patterns and was designed with Figma. I also improved my UML understanding during development. This open-source project is available on GitHub',
-  technologies: ['Scala', 'ScalaFX', 'UML'],
-  isPrivate: false,
-  link: 'https://github.com/Dereden399/procedural-image-generator'
-}
-
-const OpenGLRendererProject: ProjectInfoType = {
-  name: 'Simple OpenGL Renderer',
-  description:
-    'A simple OpenGL renderer that I developed to learn the basics of OpenGL and GLSL. The project features different computer graphics technics, such as texture maps, hierarchical modelling and bloom. I also experimented with different shaders to understand how they affect the scene. This project is open-source and available on GitHub.',
-  technologies: ['C++', 'OpenGL', 'GLSL'],
-  isPrivate: false,
-  link: 'https://github.com/Dereden399/simple-opengl-renderer'
-}
-
-const MetalRendererProject: ProjectInfoType = {
-  name: 'Simple Metal Renderer',
-  description:
-    'Metal/Swift variation of my OpenGL renderer. The project uses SwiftUI and works on MacOS and IOS. Renderer implements some of advanced features like multipass rendering and shadows.',
-  technologies: ['Swift', 'Metal', 'SwiftUI'],
-  isPrivate: false,
-  link: 'https://github.com/Dereden399/simple-metal-renderer'
-}
-
-export const projects = [
-  BeamexAR,
-  VoiceEmotionRecognitionProject,
-  OpenGLRendererProject,
-  MetalRendererProject,
-  StudyScheduleProject,
-  ProceduralImageGeneratorProject,
-  PortfolioWebsiteProject
+export const experience: ExperienceEntry[] = [
+  {
+    role: 'Launchpad Software Engineer',
+    org: 'Smartly',
+    detail:
+      'Building and shipping ad-platform integrations for Snapchat and LinkedIn used by advertisers managing large-scale campaigns',
+    dateLabel: '05/2026 – present',
+    start: 2026.33,
+    end: 2026.58
+  },
+  {
+    role: 'Software Developer',
+    org: 'Nordic Fun Gaming',
+    detail:
+      'Owned web games end-to-end - frontend, backend, infrastructure, deployment - supporting tens of thousands of concurrent players; delivered products generating 80%+ of company revenue',
+    dateLabel: '12/2024 – present',
+    start: 2024.92,
+    end: 2026.58
+  },
+  {
+    role: 'Research Assistant',
+    org: 'Aalto University',
+    detail:
+      'AI-powered TA assistant integrating model APIs with custom prompt pipelines, chatbot and helping features, and a file submission system that significantly cut memory usage - production platform serving thousands of students',
+    dateLabel: '11/2023 – 07/2024, 01/2025 – 05/2026',
+    start: 2023.83,
+    end: 2026.4
+  },
+  {
+    role: 'Teaching Assistant',
+    org: 'Aalto University',
+    detail:
+      "Coached student groups in programming courses, one team delivering a notable course project. Also supported students across various math courses, including Calculus, Probability, and Discrete Math in Aalto's Laskutupa",
+    dateLabel: '09/2023 – 04/2024, 01/2025 – 04/2025, 01/2026 - 04/2026',
+    start: 2023.67,
+    end: 2026.4
+  }
 ]

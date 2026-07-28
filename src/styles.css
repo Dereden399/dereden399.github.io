@@ -1,6 +1,93 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    @apply bg-blue-50
+    @apply bg-white font-body text-neutral-900;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-up {
+    animation: fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease 0.78s both;
+}
+
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.photo-treated {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.timeline-circle {
+    transition: background-color 0.45s ease 0.1s, transform 0.45s ease 0.1s;
+}
+
+.scroll-reveal.is-visible .timeline-circle {
+    background-color: #32a894;
+    transform: scale(1.12);
+}
+
+.timeline-connector {
+    --timeline-dots: 3;
+    color: #d4d4d4;
+    background-image: radial-gradient(
+        circle at center,
+        currentColor 2.4px,
+        transparent 2.7px
+    );
+    background-size: 100% calc(100% / var(--timeline-dots));
+    background-position: center top;
+    background-repeat: repeat-y;
+    transition: color 0.6s ease 0.25s;
+}
+
+.scroll-reveal.is-visible .timeline-connector {
+    color: #0f766e;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }

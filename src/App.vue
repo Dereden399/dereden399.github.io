@@ -1,42 +1,27 @@
 <script setup lang="ts">
-import Navbar from './components/Navbar.vue'
-import { navbarHeight } from './constants.ts'
-import EducationTimeLine from './components/EducationTimeLine.vue'
-import ProjectsSection from './components/ProjectsSection.vue'
-import ContactsSection from './components/ContactsSection.vue'
-import Footer from './components/Footer.vue'
-import SkillsSection from './components/SkillsSection.vue'
-import Header from './components/Header/Header.vue'
-import AboutMeSection from './components/AboutMeSection.vue'
+import Sidebar from './components/Sidebar.vue'
+import Hero from './components/Hero.vue'
+import AboutSection from './components/sections/AboutSection.vue'
+import MLSection from './components/sections/MLSection.vue'
+import EngineeringSection from './components/sections/EngineeringSection.vue'
+import ExperienceSection from './components/sections/ExperienceSection.vue'
+import EducationSection from './components/sections/EducationSection.vue'
+import ContactSection from './components/sections/ContactSection.vue'
 </script>
 
 <template>
-  <div class="absolute left-0 top-0 h-screen w-screen overflow-hidden">
-    <div
-      class="absolute -right-[20%] -top-[80px] -z-10 h-[240px] w-[240px] rounded-full bg-accent-50 md:-left-[8%] md:-top-[320px] md:h-[480px] md:w-[480px] lg:h-[640px] lg:w-[640px]"
-    />
-  </div>
-  <Navbar />
-  <div
-    :style="`margin-top: ${navbarHeight};`"
-    class="relative flex w-full flex-col items-center justify-center"
-  >
-    <div class="flex w-full flex-col items-center 3xl:max-w-[2400px]">
-      <Header />
-      <AboutMeSection />
-      <SkillsSection />
-      <EducationTimeLine />
-      <h1 id="projects" class="mt-2 text-3xl text-slate-950 md:mt-4">
-        Projects
-      </h1>
-      <ProjectsSection />
-      <div class="flex w-full flex-col items-center p-2 lg:max-w-[80%] lg:p-0">
-        <h1 id="contacts" class="mt-4 text-3xl text-slate-950 md:mt-6">
-          Get in touch
-        </h1>
-        <ContactsSection />
+  <div class="grid min-h-screen grid-cols-[240px_1fr] bg-white">
+    <Sidebar />
+    <main>
+      <Hero />
+      <div class="pt-18 pb-30 mx-auto max-w-[900px] px-16">
+        <AboutSection />
+        <MLSection />
+        <EngineeringSection />
+        <ExperienceSection />
+        <EducationSection />
+        <ContactSection />
       </div>
-    </div>
+    </main>
   </div>
-  <Footer class="mt-16" />
 </template>
