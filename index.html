@@ -12,11 +12,37 @@
     <meta name="keywords" content="web, mobile, developer, javascript, typescript, react, react native, nodejs, express, mongodb, jest, cypress, docker" />
     <meta name="author" content="Denis Kuznetsov" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Denis' page</title>
-    <script type="module" crossorigin src="/assets/index-BSKwvAmm.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-DbOs0JXv.css">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0c12" media="(prefers-color-scheme: dark)" />
+    <script>
+      (function () {
+        try {
+          var system = window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light'
+          var theme = system
+          var raw = localStorage.getItem('theme')
+          if (raw) {
+            var saved = JSON.parse(raw)
+            if (saved.system === system) theme = saved.theme
+          }
+          var dark = theme === 'dark'
+          if (dark) document.documentElement.classList.add('dark')
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light'
+        } catch (e) {}
+      })()
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Denis Kuznetsov</title>
+    <script type="module" crossorigin src="/assets/index-DC2E2A9Q.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bh3YuLWZ.css">
   </head>
-  <body class="overflow-x-hidden">
+  <body>
     <div id="app"></div>
   </body>
 </html>
